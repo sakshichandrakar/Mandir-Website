@@ -1,0 +1,30 @@
+<html>
+    <head>
+      {{>FrontEnd/headerLink}}
+    </head>
+    <body>
+        {{>FrontEnd/navbar}}
+
+        <!---Start Main section----> 
+        <div class="container-fluid main_header">
+            <div class ="row">
+                 <div class="col-md-10 col-12 mx-auto">
+                    <div class="row">                        
+                        <!---Left Side Div----> 
+                        <div class="col-md-12 col-12 main_header_left align-items-center">
+                            <figure>
+                              <img src="images/404.jpeg" alt="Image1" class="img-fluid" title="Iamge1">
+                            </figure>
+                            <p>Welcome to Prashant Ranjan Singh Page</p>
+                            <h1>{{errormsg}}</h1>
+                            <a href="/" ><button>Back To Home Page</button></a>
+                         </div>                                
+                    </div>
+                 </div>
+            </div>
+        </div>
+        <!---End Main section----> 
+
+        {{>FrontEnd/footer}}
+    </body>
+</html>
