@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  {{>BackEnd/headerLink}}
+</head>
+
+<body id="page-top">
+
+    <!-- Page Wrapper -->
+    <div id="wrapper">
+
+        {{>BackEnd/sidebar}}
+
+        <!-- Content Wrapper -->
+        <div id="content-wrapper" class="d-flex flex-column">
+
+            <!-- Main Content -->
+            <div id="content">
+
+               {{>BackEnd/topbar}}
+
+                <!-- Begin Page Content -->
+                <div class="container-fluid">
+
+                    <!-- Page Heading -->
+
+                     <div class="card shadow mb-4">
+                        <div class="card-header py-3">
+                           <h1 class="h3 mb-2 text-gray-800">Add Testimonials <span class="float-right"><a href="add-testimonial" class="btn btn-primary btn-user btn-block" >
+                                   Add Testimonial
+                                </a></span> </h1>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                    <thead>
+                                        <tr>
+                                            <th>Name</th>
+                                            <th>Message</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tfoot>
+                                        <tr>
+                                            <th>Name</th>
+                                            <th>Message</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </tfoot>
+                                    <tbody>
+                                        {{#each testimonial_data as |data|}}
+                                        <tr>
+                                            <td>{{data.name}}</td>
+                                            <td>{{data.message}}</td>
+                                            <td>
+                                                <span class="d-flex"><a href="add-testimonial" class="btn btn-danger btn-circle btn-sm m-0">
+                                                  <i class="fas fa-trash"></i>
+                                                </a>
+                                                <a href="/testimonialedit?id={{data.id}}" class="btn btn-primary btn-circle btn-sm">
+                                                  <i class="fas fa-edit"></i>
+                                                </a></span>
+                                            </td>
+                                        </tr>
+                                        {{/each}}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <!-- /.container-fluid -->
+
+            </div>
+            <!-- End of Main Content -->
+
+            {{>BackEnd/footer}}
+
+        </div>
+        <!-- End of Content Wrapper -->
+
+    </div>
+    <!-- End of Page Wrapper -->
+
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+        <i class="fas fa-angle-up"></i>
+    </a>
+
+   {{>BackEnd/footerLink}}
+   <script>
+    'use strict';    
+    document.addEventListener('DOMContentLoaded', function(e) {
+        (function() {
+            const deactivateAcc = document.querySelector('#formAccountDeactivation');
+            // Update/reset user image of account page
+            let accountUserImage = document.getElementById('uploadedAvatar');
+            const fileInput = document.querySelector('.account-file-input'),
+                resetFileInput = document.querySelector('.account-image-reset');
+            if (accountUserImage) {
+                const resetImage = accountUserImage.src;
+                fileInput.onchange = () => {
+                    if (fileInput.files[0]) {
+                        accountUserImage.src = window.URL.createObjectURL(fileInput.files[0]);
+                    }
+                };
+            }
+        })();
+    });
+     </script>
+     <!-- Add this script to your HTML template or include it in a separate JavaScript file -->
+<script>
+    document.addEventListener('DOMContentLoaded', async function () {
+        try {
+            const response = await fetch('http://localhost:4000/web-details-data');
+            console.log(response);
+            const webDetails = await response.json();
+
+            webDetails.forEach(detail => {
+                var emailInput = document.getElementById("exampleInputEmail");
+                var mobile_no = document.getElementById("mobile_no");
+                var instagram = document.getElementById("instagram");
+                var twitter = document.getElementById("twitter");
+                var facebook = document.getElementById("facebook");
+                var youtube = document.getElementById("youtube");
+                var address = document.getElementById("address");
+
+                emailInput.value = detail.email;
+                mobile_no.value = detail.mobile_no;
+                instagram.value = detail.instagram_link;
+                twitter.value = detail.twitter_link;
+                facebook.value = detail.facebook_link;
+                youtube.value = detail.youtube_link;
+                address.value = detail.address;
+            });
+        } catch (error) {
+            console.error('Error fetching web details:', error);
+        }
+    });
+</script>
+
+</body>
+
+</html>

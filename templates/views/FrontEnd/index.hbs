@@ -595,24 +595,14 @@
               </div>
               <i class="flaticon-right-quote icon"></i>
               <div class="sigma_testimonial-slider-1">
-                <div class="sigma_testimonial-slider-item">
-                  <p>If money help a man to do well to others, it is of some value; but if not, it is simply a mass of evil, and the sooner it is got rid of, the better.</p>
-                  <div class="sigma_testimonial-author">
-                    <cite>Mukesh Singh</cite>
-                  </div>
-                </div>
-                <div class="sigma_testimonial-slider-item">
-                  <p>If money help a man to do well to others, it is of some value; but if not, it is simply a mass of evil, and the sooner it is got rid of, the better.</p>
-                  <div class="sigma_testimonial-author">
-                    <cite>Das Gupta</cite>
-                  </div>
-                </div>
-                <div class="sigma_testimonial-slider-item">
-                  <p>If money help a man to do well to others, it is of some value; but if not, it is simply a mass of evil, and the sooner it is got rid of, the better.</p>
-                  <div class="sigma_testimonial-author">
-                    <cite>R Patel</cite>
-                  </div>
-                </div>
+                 {{#each testimonial_data as |data|}}
+                    <div class="sigma_testimonial-slider-item">
+                      <p>{{data.message}}</p>
+                      <div class="sigma_testimonial-author">
+                        <cite>{{data.name}}</cite>
+                      </div>
+                    </div>
+                  {{/each}}
               </div>
             </div>
           </div>
