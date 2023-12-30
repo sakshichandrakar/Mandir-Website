@@ -131,7 +131,6 @@
     document.addEventListener('DOMContentLoaded', function(e) {
         (function() {
             const deactivateAcc = document.querySelector('#formAccountDeactivation');
-            // Update/reset user image of account page
             let accountUserImage = document.getElementById('uploadedAvatar');
             const fileInput = document.querySelector('.account-file-input'),
                 resetFileInput = document.querySelector('.account-image-reset');
@@ -146,14 +145,11 @@
         })();
     });
      </script>
-     <!-- Add this script to your HTML template or include it in a separate JavaScript file -->
 <script>
     document.addEventListener('DOMContentLoaded', async function () {
         try {
             const response = await fetch('http://localhost:4000/web-details-data');
-            console.log(response);
             const webDetails = await response.json();
-
             webDetails.forEach(detail => {
                 var emailInput = document.getElementById("exampleInputEmail");
                 var mobile_no = document.getElementById("mobile_no");
@@ -176,7 +172,5 @@
         }
     });
 </script>
-
 </body>
-
 </html>

@@ -1,30 +1,35 @@
-<html>
-    <head>
-      {{>FrontEnd/headerLink}}
-    </head>
-    <body>
-        {{>FrontEnd/navbar}}
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+   {{>FrontEnd/headerLink}}
+</head>
+<body>
+  {{> FrontEnd/navbar}}
 
-        <!---Start Main section----> 
-        <div class="container-fluid main_header">
-            <div class ="row">
-                 <div class="col-md-10 col-12 mx-auto">
-                    <div class="row">                        
-                        <!---Left Side Div----> 
-                        <div class="col-md-12 col-12 main_header_left align-items-center">
-                            <figure>
-                              <img src="images/404.jpeg" alt="Image1" class="img-fluid" title="Iamge1">
-                            </figure>
-                            <p>Welcome to Prashant Ranjan Singh Page</p>
-                            <h1>{{errormsg}}</h1>
-                            <a href="/" ><button>Back To Home Page</button></a>
-                         </div>                                
-                    </div>
-                 </div>
-            </div>
+  <!-- partial -->
+  <div class="sigma_subheader dark-overlay dark-overlay-2" style="background-image: url(assets/img/subheader.jpg)">
+
+    <div class="container">
+      <div class="sigma_subheader-inner">
+        <div class="sigma_subheader-text">
+          <h1>{{message}}</h1>
         </div>
-        <!---End Main section----> 
+      </div>
+    </div>
 
-        {{>FrontEnd/footer}}
-    </body>
+  </div>
+  <!-- partial -->
+
+ <div class="section section-padding">
+        <div class="container">
+          <div class="section-title text-center">
+            <h4 class="title">{{message}}</h4>
+          </div>
+        </div>
+    </div>
+
+ {{>FrontEnd/footer}}
+  {{>FrontEnd/footerLink}}
+
+</body>
 </html>
