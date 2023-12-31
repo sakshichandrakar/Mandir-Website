@@ -61,22 +61,11 @@ class testimonials {
       });
     });
   }
-  static getImageCategory(){
-    const selectImageQuery = ' SELECT category.id, category.category_name FROM category INNER JOIN image_gallery ON category.id = image_gallery.category_id WHERE category.is_active = 0 AND category.is_deleted = 0 GROUP BY category.id';
+
+  static getImageGalleryAll() {
+    const selectAllQuery = 'SELECT * FROM image_gallery';
     return new Promise((resolve, reject) => {
-      connection.query(selectImageQuery, (error, results) => {
-        if (error) {
-          reject(error);
-        } else {
-          resolve(results);
-        }
-      });
-    });
-  }
-  static getImageGallries(){
-    const imageGalleryQuery = 'SELECT * FROM image_gallery';
-    return new Promise((resolve, reject) => {
-      connection.query(imageGalleryQuery, (error, results) => {
+      connection.query(selectAllQuery, (error, results) => {
         if (error) {
           reject(error);
         } else {
