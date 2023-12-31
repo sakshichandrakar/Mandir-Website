@@ -61,19 +61,6 @@ class testimonials {
       });
     });
   }
-
-  static getImageGalleryAll() {
-    const selectAllQuery = 'SELECT * FROM image_gallery';
-    return new Promise((resolve, reject) => {
-      connection.query(selectAllQuery, (error, results) => {
-        if (error) {
-          reject(error);
-        } else {
-          resolve(results);
-        }
-      });
-    });
-  }
 }
 
 

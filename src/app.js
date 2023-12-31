@@ -124,8 +124,8 @@ app.get("/pandit-details",async (req,res) =>{
      }
 });
 app.get("/events", async(req,res) =>{
-  try {
-    let webDetail = await fetchData(); 
+    try {
+        let webDetail = await fetchData(); 
         res.render("FrontEnd/events", { title: "Event", webDetail});
         } catch (error) {
         res.render("FrontEnd/404", { title: "Error Page",webDetail, message: "Internal Server Error"});  
@@ -134,11 +134,8 @@ app.get("/events", async(req,res) =>{
 app.get("/puja",async (req,res) =>{
     try {
         let webDetail = await fetchData(); 
-        const imageCategoryData = await galleryController.getImageCategory();
-        const imageGallriesData = await galleryController.getImageGallery();
-        console.log(imageGallriesData);
-        res.render("FrontEnd/puja", { title: "Puja", webDetail,imageCategoryData,imageGallriesData});
-      } catch (error) {
+        res.render("FrontEnd/puja", { title: "Puja", webDetail});
+        } catch (error) {
         res.render("FrontEnd/404", { title: "Error Page",webDetail, message: "Internal Server Error"}); 
        }
 });
@@ -232,14 +229,9 @@ app.get("/category", async (req,res) =>{
   res.render("BackEnd/category",{category_data, title: "Categoty"},);
 });
 
-app.get("/add-image-gallery", async (req,res) =>{
-  const galleryData = await galleryController.getimagegallery();
-  res.render("BackEnd/add_image_gallery",{galleryData, title: "Add Gallery"});
-});
-
-app.get("/image-gallery", async (req,res) =>{
-  const galleryData = await galleryController.getimagegallery();
-  res.render("BackEnd/image_gallery",{galleryData, title: "Gallery"});
+app.get("/add-category", async (req,res) =>{
+  const testimonial_data = await testimonialController.gettestimonial();
+  res.render("BackEnd/add_category",{testimonial_data, title: "Add Categoty"});
 });
 
 app.get("*", async(req,res) =>{

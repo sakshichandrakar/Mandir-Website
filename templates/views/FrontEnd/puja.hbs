@@ -29,29 +29,163 @@
 
   <!-- Categories Start -->
   <div class="section section-padding">
-    <div class="container">                         
+    <div class="container">
+
       <div class="text-center filter-items">
         <h5 class="active portfolio-trigger" data-filter="*">All</h5>
-        {{#each imageCategoryData as |data|}}
-        <h5 class="portfolio-trigger" data-filter=".{{data.id}}">{{data.category_name}}</h5>
-        {{/each}}
+        <h5 class="portfolio-trigger" data-filter=".coaching">Coaching</h5>
+        <h5 class="portfolio-trigger" data-filter=".stakeholder">Stakeholder</h5>
+        <h5 class="portfolio-trigger" data-filter=".strategy">Strategy</h5>
+        <h5 class="portfolio-trigger" data-filter=".relations">Relations</h5>
       </div>
-    <div class="portfolio-filter row">
-      {{#each imageGallriesData as |data|}}
-        <div class="col-lg-4 {{data.category_id}}">
+
+      <div class="portfolio-filter row">
+        <div class="col-lg-4 coaching">
           <div class="sigma_portfolio-item">
-            <img src="assets/img/puja/{{data.image}}" alt="portfolio">
+            <img src="assets/img/puja/13.jpg" alt="portfolio">
             <div class="sigma_portfolio-item-content">
               <div class="sigma_portfolio-item-content-inner">
-                <h5> <a href="puja-details"> {{data.title}} </a> </h5>
-                <p>{{data.description}}</p>
+                <h5> <a href="puja-details"> Durga Puja </a> </h5>
+                <p>Puja is the worship of the Lord, consectet ur adipisicing elit, sed do eiusmod</p>
               </div>
               <a href="puja-details"><i class="fal fa-plus"></i></a>
             </div>
           </div>
         </div>
-      {{/each}}
+        <div class="col-lg-4 strategy">
+          <div class="sigma_portfolio-item">
+            <img src="assets/img/puja/14.jpg" alt="portfolio">
+            <div class="sigma_portfolio-item-content">
+              <div class="sigma_portfolio-item-content-inner">
+                <h5> <a href="puja-details"> Raksha Bandhan </a> </h5>
+                <p>Puja is the worship of the Lord, consectet ur adipisicing elit, sed do eiusmod</p>
+              </div>
+              <a href="puja-details"><i class="fal fa-plus"></i></a>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4 coaching strategy">
+          <div class="sigma_portfolio-item">
+            <img src="assets/img/puja/15.jpg" alt="portfolio">
+            <div class="sigma_portfolio-item-content">
+              <div class="sigma_portfolio-item-content-inner">
+                <h5> <a href="puja-details"> Janmashtmi </a> </h5>
+                <p>Puja is the worship of the Lord, consectet ur adipisicing elit, sed do eiusmod</p>
+              </div>
+              <a href="puja-details"><i class="fal fa-plus"></i></a>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4 relations coaching">
+          <div class="sigma_portfolio-item">
+            <img src="assets/img/puja/16.jpg" alt="portfolio">
+            <div class="sigma_portfolio-item-content">
+              <div class="sigma_portfolio-item-content-inner">
+                <h5> <a href="puja-details"> Mahashivratri </a> </h5>
+                <p>Puja is the worship of the Lord, consectet ur adipisicing elit, sed do eiusmod</p>
+              </div>
+              <a href="puja-details"><i class="fal fa-plus"></i></a>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4 stakeholder strategy">
+          <div class="sigma_portfolio-item">
+            <img src="assets/img/puja/17.jpg" alt="portfolio">
+            <div class="sigma_portfolio-item-content">
+              <div class="sigma_portfolio-item-content-inner">
+                <h5> <a href="puja-details"> Holi </a> </h5>
+                <p>Puja is the worship of the Lord, consectet ur adipisicing elit, sed do eiusmod</p>
+              </div>
+              <a href="puja-details"><i class="fal fa-plus"></i></a>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4 stakeholder">
+          <div class="sigma_portfolio-item">
+            <img src="assets/img/puja/12.jpg" alt="portfolio">
+            <div class="sigma_portfolio-item-content">
+              <div class="sigma_portfolio-item-content-inner">
+                <h5> <a href="puja-details"> Diwali </a> </h5>
+                <p>Puja is the worship of the Lord, consectet ur adipisicing elit, sed do eiusmod</p>
+              </div>
+              <a href="puja-details"><i class="fal fa-plus"></i></a>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4 coaching">
+          <div class="sigma_portfolio-item">
+            <img src="assets/img/puja/7.jpg" alt="portfolio">
+            <div class="sigma_portfolio-item-content">
+              <div class="sigma_portfolio-item-content-inner">
+                <h5> <a href="puja-details"> Holi-Colour Festival </a> </h5>
+                <p>Puja is the worship of the Lord, consectet ur adipisicing elit, sed do eiusmod</p>
+              </div>
+              <a href="puja-details"><i class="fal fa-plus"></i></a>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4 relations">
+          <div class="sigma_portfolio-item">
+            <img src="assets/img/puja/8.jpg" alt="portfolio">
+            <div class="sigma_portfolio-item-content">
+              <div class="sigma_portfolio-item-content-inner">
+                <h5> <a href="puja-details"> Holi's Ministry </a> </h5>
+                <p>Puja is the worship of the Lord, consectet ur adipisicing elit, sed do eiusmod</p>
+              </div>
+              <a href="puja-details"><i class="fal fa-plus"></i></a>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4 relations coaching">
+          <div class="sigma_portfolio-item">
+            <img src="assets/img/puja/9.jpg" alt="portfolio">
+            <div class="sigma_portfolio-item-content">
+              <div class="sigma_portfolio-item-content-inner">
+                <h5> <a href="puja-details"> Labour Ministry </a> </h5>
+                <p>Puja is the worship of the Lord, consectet ur adipisicing elit, sed do eiusmod</p>
+              </div>
+              <a href="puja-details"><i class="fal fa-plus"></i></a>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4 stakeholder strategy">
+          <div class="sigma_portfolio-item">
+            <img src="assets/img/puja/10.jpg" alt="portfolio">
+            <div class="sigma_portfolio-item-content">
+              <div class="sigma_portfolio-item-content-inner">
+                <h5> <a href="puja-details"> Event Ministry </a> </h5>
+                <p>Puja is the worship of the Lord, consectet ur adipisicing elit, sed do eiusmod</p>
+              </div>
+              <a href="puja-details"><i class="fal fa-plus"></i></a>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4 stakeholder">
+          <div class="sigma_portfolio-item">
+            <img src="assets/img/puja/11.jpg" alt="portfolio">
+            <div class="sigma_portfolio-item-content">
+              <div class="sigma_portfolio-item-content-inner">
+                <h5> <a href="puja-details"> Temple Minsitry </a> </h5>
+                <p>Puja is the worship of the Lord, consectet ur adipisicing elit, sed do eiusmod</p>
+              </div>
+              <a href="puja-details"><i class="fal fa-plus"></i></a>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4 coaching">
+          <div class="sigma_portfolio-item">
+            <img src="assets/img/puja/12.jpg" alt="portfolio">
+            <div class="sigma_portfolio-item-content">
+              <div class="sigma_portfolio-item-content-inner">
+                <h5> <a href="puja-details"> Durga Mahastami </a> </h5>
+                <p>Puja is the worship of the Lord, consectet ur adipisicing elit, sed do eiusmod</p>
+              </div>
+              <a href="puja-details"><i class="fal fa-plus"></i></a>
+            </div>
+          </div>
+        </div>
       </div>
+
     </div>
   </div>
   <!-- Categories End -->
