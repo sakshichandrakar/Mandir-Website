@@ -30,9 +30,7 @@ const getcategoryId = async (testimonialId) => {
   } catch (error) {
     console.error(error);
     throw new Error('Internal Server Error');
-  }
-
-  
+  }  
 };
 
 const getImageCategory = async (req, res) => {
