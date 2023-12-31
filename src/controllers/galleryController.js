@@ -33,8 +33,19 @@ const getcategoryId = async (testimonialId) => {
   }
 };
 
+const getimagegallery = async (req, res) => {
+  try {
+    const imageGalleryData = await gallery.getImageGalleryAll();
+    return imageGalleryData;
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+};
+
 module.exports = {
   Addcategory,
   getcategory,
-  getcategoryId
+  getcategoryId,
+  getimagegallery
 };

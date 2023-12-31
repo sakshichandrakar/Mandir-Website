@@ -229,9 +229,14 @@ app.get("/category", async (req,res) =>{
   res.render("BackEnd/category",{category_data, title: "Categoty"},);
 });
 
-app.get("/add-category", async (req,res) =>{
-  const testimonial_data = await testimonialController.gettestimonial();
-  res.render("BackEnd/add_category",{testimonial_data, title: "Add Categoty"});
+app.get("/add-image-gallery", async (req,res) =>{
+  const galleryData = await galleryController.getimagegallery();
+  res.render("BackEnd/add_image_gallery",{galleryData, title: "Add Gallery"});
+});
+
+app.get("/image-gallery", async (req,res) =>{
+  const galleryData = await galleryController.getimagegallery();
+  res.render("BackEnd/image_gallery",{galleryData, title: "Gallery"});
 });
 
 app.get("*", async(req,res) =>{
