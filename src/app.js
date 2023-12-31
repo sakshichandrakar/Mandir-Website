@@ -124,8 +124,8 @@ app.get("/pandit-details",async (req,res) =>{
      }
 });
 app.get("/events", async(req,res) =>{
-    try {
-        let webDetail = await fetchData(); 
+  try {
+    let webDetail = await fetchData(); 
         res.render("FrontEnd/events", { title: "Event", webDetail});
         } catch (error) {
         res.render("FrontEnd/404", { title: "Error Page",webDetail, message: "Internal Server Error"});  
@@ -134,8 +134,11 @@ app.get("/events", async(req,res) =>{
 app.get("/puja",async (req,res) =>{
     try {
         let webDetail = await fetchData(); 
-        res.render("FrontEnd/puja", { title: "Puja", webDetail});
-        } catch (error) {
+        const imageCategoryData = await galleryController.getImageCategory();
+        const imageGallriesData = await galleryController.getImageGallery();
+        console.log(imageGallriesData);
+        res.render("FrontEnd/puja", { title: "Puja", webDetail,imageCategoryData,imageGallriesData});
+      } catch (error) {
         res.render("FrontEnd/404", { title: "Error Page",webDetail, message: "Internal Server Error"}); 
        }
 });
