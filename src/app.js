@@ -5,6 +5,8 @@ const bodyParser = require('body-parser');
 const webDetailController = require('./controllers/webDetailController');
 const loginController = require('./controllers/loginController');
 const testimonialController = require('./controllers/testimonialController');
+const galleryController = require('./controllers/galleryController');
+
 
 const app = express();
 require("./db/conn");
@@ -113,6 +115,14 @@ app.get("/volunteer-detail",async (req,res) =>{
           res.render("FrontEnd/404", { title: "Error Page",webDetail, message: "Internal Server Error"});   
        }
 });
+app.get("/pandit-details",async (req,res) =>{
+  try {
+      let webDetail = await fetchData(); 
+      res.render("FrontEnd/pandit-details", { title: "Valunteer Details", webDetail});
+      } catch (error) {
+        res.render("FrontEnd/404", { title: "Error Page",webDetail, message: "Internal Server Error"});   
+     }
+});
 app.get("/events", async(req,res) =>{
     try {
         let webDetail = await fetchData(); 
@@ -192,6 +202,7 @@ app.get("/testimonial", async (req,res) =>{
   res.render("BackEnd/testimonials",{testimonial_data, title: "Testmonials"},);
 });
 
+
 app.get("/add-testimonial", async (req,res) =>{
   const testimonial_data = await testimonialController.gettestimonial();
   res.render("BackEnd/add_testimonials",{testimonial_data, title: "Add Testimonial"});
@@ -211,6 +222,17 @@ app.get("/web-details-data", webDetailController.getWebDetails);
 app.post("/admin-login", loginController.login);
 app.post('/testimonial', testimonialController.Addtestimonial);
 app.get("/testimonial-list", testimonialController.gettestimonial);
+
+
+app.get("/category", async (req,res) =>{
+  const category_data = await galleryController.getcategory();
+  res.render("BackEnd/category",{category_data, title: "Categoty"},);
+});
+
+app.get("/add-category", async (req,res) =>{
+  const testimonial_data = await testimonialController.gettestimonial();
+  res.render("BackEnd/add_category",{testimonial_data, title: "Add Categoty"});
+});
 
 app.get("*", async(req,res) =>{
   let webDetail = await fetchData(); 
