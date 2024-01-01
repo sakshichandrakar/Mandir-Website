@@ -133,8 +133,9 @@ app.get("/events", async(req,res) =>{
 });
 app.get("/puja",async (req,res) =>{
     try {
-        let webDetail = await fetchData(); 
-        res.render("FrontEnd/puja", { title: "Puja", webDetail});
+        let webDetail = await fetchData(); const categoryPujaData = await galleryController.getPujaCategory();
+        const galleryPujadata = await galleryController.getPujaGallery();
+        res.render("FrontEnd/puja", { title: "Puja", webDetail,categoryPujaData,galleryPujadata});
         } catch (error) {
         res.render("FrontEnd/404", { title: "Error Page",webDetail, message: "Internal Server Error"}); 
        }

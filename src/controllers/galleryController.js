@@ -43,9 +43,31 @@ const getimagegallery = async (req, res) => {
   }
 };
 
+const getPujaCategory = async (req, res) => {
+  try {
+    const categoryPujaData = await gallery.getPujaCategoryAll();
+    return categoryPujaData;
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+};
+
+const getPujaGallery = async (req, res) => {
+  try {
+    const pujaGalleryData = await gallery.getPujaGalleryAll();
+    return pujaGalleryData;
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+};
+
 module.exports = {
   Addcategory,
   getcategory,
   getcategoryId,
-  getimagegallery
+  getimagegallery,
+  getPujaCategory,
+  getPujaGallery
 };
