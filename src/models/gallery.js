@@ -1,6 +1,6 @@
 const connection = require("../db/conn");
 
-class testimonials {
+class gallery {
   static add(detail) {
     const { name, message, editId } = detail;
 
@@ -74,8 +74,36 @@ class testimonials {
       });
     });
   }
+  static getPujaCategoryAll() {
+    const PujaAllCategory =  `SELECT category.id, category.category_name
+    FROM category
+    INNER JOIN image_gallery ON category.id = image_gallery.category_id
+    WHERE category.is_active = 0 AND category.is_deleted = 0
+    GROUP BY category.id`;
+    return new Promise((resolve, reject) => {
+      connection.query(PujaAllCategory, (error, results) => {
+        if (error) {
+          reject(error);
+        } else {
+          resolve(results);
+        }
+      });
+    });
+  }
+  static getPujaGalleryAll() {
+    const pujaimages = `SELECT * from image_gallery`;
+    return new Promise((resolve, reject) => {
+      connection.query(pujaimages, (error, results) => {
+        if (error) {
+          reject(error);
+        } else {
+          resolve(results);
+        }
+      });
+    });
+  }
 
 }
 
 
-module.exports = testimonials;
+module.exports = gallery;
