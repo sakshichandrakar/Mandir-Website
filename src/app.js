@@ -223,11 +223,20 @@ app.get("/web-details-data", webDetailController.getWebDetails);
 app.post("/admin-login", loginController.login);
 app.post('/testimonial', testimonialController.Addtestimonial);
 app.get("/testimonial-list", testimonialController.gettestimonial);
-
+app.post('/category', galleryController.Addcategory);
 
 app.get("/category", async (req,res) =>{
   const category_data = await galleryController.getcategory();
   res.render("BackEnd/category",{category_data, title: "Categoty"},);
+});
+
+app.get('/categoryedit', async (req, res) => {
+  const categoryId = req.query.id;
+  const category_data = await galleryController.getcategoryId(categoryId);
+  try {
+     res.render("BackEnd/category",{category_data, title: "Add category"});
+  } catch (error) {
+    res.render("FrontEnd/404", { title: "Error Page",webDetail, message: "Internal Server Error"});  }
 });
 
 app.get("/add-image-gallery", async (req,res) =>{
@@ -247,4 +256,5 @@ app.get("*", async(req,res) =>{
 
 app.listen(port ,() =>{
     console.log(`Listening to the port at ${port}`);
-})
+});
+
