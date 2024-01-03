@@ -64,11 +64,26 @@ const getPujaGallery = async (req, res) => {
   }
 };
 
+const AddImageGallery = async (req, res) => {
+  try {
+    const {title,description,image,category_id ,editId} = req.body;
+    const Test = {title,description,image,category_id ,editId };
+    const result = await gallery.addImageGallery(Test);
+    console.log(result);
+    
+    res.redirect('/image-gallery');
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+};
+
 module.exports = {
   Addcategory,
   getcategory,
   getcategoryId,
   getimagegallery,
   getPujaCategory,
-  getPujaGallery
+  getPujaGallery,
+  AddImageGallery
 };
