@@ -1,14 +1,13 @@
 const connection = require("../db/conn");
 
 class gallery {
-  static add(detail) {
-    const { name, message, editId } = detail;
-
+  static addCategory(detail) {
+    const { category_name, editId } = detail;
     if (editId > 0) {
       // If editId is provided, update the existing testimonial
       return new Promise((resolve, reject) => {
-        const updateQuery = 'UPDATE testimonials SET name = ?, message = ? WHERE id = ?';
-        connection.query(updateQuery, [name, message, editId], (updateError) => {
+        const updateQuery = 'UPDATE category SET category_name = ? WHERE id = ?';
+        connection.query(updateQuery, [category_name, editId], (updateError) => {
           if (updateError) {
             reject(updateError);
           } else {
@@ -19,8 +18,8 @@ class gallery {
     } else {
       // If editId is not provided, insert a new testimonial
       return new Promise((resolve, reject) => {
-        const insertQuery = 'INSERT INTO testimonials(name, message) VALUES (?, ?)';
-        connection.query(insertQuery, [name, message], (insertError, insertResults) => {
+        const insertQuery = 'INSERT INTO category(category_name) VALUES (?)';
+        connection.query(insertQuery, [category_name], (insertError, insertResults) => {
           if (insertError) {
             reject(insertError);
           } else {
@@ -45,8 +44,8 @@ class gallery {
     });
   }
 
-  static findById(id) {
-    const selectByIdQuery = 'SELECT * FROM testimonials WHERE id = ?';
+  static findByCategoryId(id) {
+    const selectByIdQuery = 'SELECT * FROM category WHERE id = ?';
     return new Promise((resolve, reject) => {
       connection.query(selectByIdQuery, [id], (error, results) => {
         if (error) {
@@ -89,6 +88,7 @@ class gallery {
         }
       });
     });
+
   }
   static getPujaGalleryAll() {
     const pujaimages = `SELECT * from image_gallery`;
