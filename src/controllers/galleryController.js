@@ -2,11 +2,12 @@ const gallery = require('../models/gallery');
 
 const Addcategory = async (req, res) => {
   try {
-    const { name, message ,editId} = req.body;
-    const Test = { name, message,editId };
-    const result = await testimonials.add(Test);
-    res.redirect('/testimonial');
-
+    const {category_name ,editId} = req.body;
+    const Test = {category_name,editId };
+    const result = await gallery.addCategory(Test);
+    console.log(result);
+    
+    res.redirect('/category');
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: 'Internal Server Error' });
@@ -23,10 +24,10 @@ const getcategory = async (req, res) => {
   }
 };
 
-const getcategoryId = async (testimonialId) => {
+const getcategoryId = async (categoryId) => {
   try {
-    const testimonial = await testimonials.findById(testimonialId);
-    return testimonial;
+    const category= await gallery.findByCategoryId(categoryId);
+    return category;
   } catch (error) {
     console.error(error);
     throw new Error('Internal Server Error');

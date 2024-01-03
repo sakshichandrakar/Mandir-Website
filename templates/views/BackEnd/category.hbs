@@ -31,16 +31,15 @@
                         </div>
                         
                         <div class="card-body">
-                             <form class="user" action="category" method="POST">
-                                    <input type="hidden" name="editId" value="{{testimonial_data.id}}">
+                             <form class="user" action="/category" method="POST">
+                                    <input type="hidden" name="editId" value="{{category_data.id}}">
                                     <div class="row">
                                         <div class="col-lg-6">
                                             <div class="form-group">
                                                 <label class="form-label" >Category Name</label>
-                                                <input type="hidden" name="editId" value="{{testimonial_data.id}}">
 
                                                 <input type="text" class="form-control form-control-user"
-                                                placeholder="Enter Name..." name="name" value="{{testimonial_data.name}}">
+                                                placeholder="Enter Name..." name="category_name" value="{{category_data.category_name}}">
                                             </div>
                                         </div>
                                         
@@ -76,10 +75,10 @@
                                             <td>{{data.category_name}}</td>
                                             <td>Status</td>
                                             <td>
-                                                <span class="d-flex"><a href="add-testimonial" class="btn btn-danger btn-circle btn-sm m-0">
+                                                <span class="d-flex"><a href="add-category" class="btn btn-danger btn-circle btn-sm m-0">
                                                   <i class="fas fa-trash"></i>
                                                 </a>
-                                                <a href="/testimonialedit?id={{data.id}}" class="btn btn-primary btn-circle btn-sm">
+                                                <a href="/categoryedit?id={{data.id}}" class="btn btn-primary btn-circle btn-sm">
                                                   <i class="fas fa-edit"></i>
                                                 </a></span>
                                             </td>
