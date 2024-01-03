@@ -133,7 +133,8 @@ app.get("/events", async(req,res) =>{
 });
 app.get("/puja",async (req,res) =>{
     try {
-        let webDetail = await fetchData(); const categoryPujaData = await galleryController.getPujaCategory();
+        let webDetail = await fetchData(); 
+        const categoryPujaData = await galleryController.getPujaCategory();
         const galleryPujadata = await galleryController.getPujaGallery();
         res.render("FrontEnd/puja", { title: "Puja", webDetail,categoryPujaData,galleryPujadata});
         } catch (error) {
@@ -224,6 +225,7 @@ app.post("/admin-login", loginController.login);
 app.post('/testimonial', testimonialController.Addtestimonial);
 app.get("/testimonial-list", testimonialController.gettestimonial);
 app.post('/category', galleryController.Addcategory);
+app.post('/add-image-gallery', galleryController.AddImageGallery);
 
 app.get("/category", async (req,res) =>{
   const category_data = await galleryController.getcategory();
@@ -232,21 +234,23 @@ app.get("/category", async (req,res) =>{
 
 app.get('/categoryedit', async (req, res) => {
   const categoryId = req.query.id;
-  const category_data = await galleryController.getcategoryId(categoryId);
+  const category_edit_data = await galleryController.getcategoryId(categoryId);
+  const category_data = await galleryController.getcategory();
   try {
-     res.render("BackEnd/category",{category_data, title: "Add category"});
+     res.render("BackEnd/category",{category_data,category_edit_data, title: "Add category"});
   } catch (error) {
     res.render("FrontEnd/404", { title: "Error Page",webDetail, message: "Internal Server Error"});  }
 });
 
 app.get("/add-image-gallery", async (req,res) =>{
+  const categoryAll = await galleryController.getcategory();
   const galleryData = await galleryController.getimagegallery();
-  res.render("BackEnd/add_image_gallery",{galleryData, title: "Add Gallery"});
+  res.render("BackEnd/add_image_gallery",{galleryData,categoryAll, title: "Add Image Gallery"});
 });
 
 app.get("/image-gallery", async (req,res) =>{
   const galleryData = await galleryController.getimagegallery();
-  res.render("BackEnd/image_gallery",{galleryData, title: "Gallery"});
+  res.render("BackEnd/image_gallery",{galleryData, title: "Image Gallery"});
 });
 
 app.get("*", async(req,res) =>{

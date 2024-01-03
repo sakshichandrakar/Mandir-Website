@@ -4,7 +4,7 @@ class gallery {
   static addCategory(detail) {
     const { category_name, editId } = detail;
     if (editId > 0) {
-      // If editId is provided, update the existing testimonial
+      // If editId is provided, update the existing category
       return new Promise((resolve, reject) => {
         const updateQuery = 'UPDATE category SET category_name = ? WHERE id = ?';
         connection.query(updateQuery, [category_name, editId], (updateError) => {
@@ -16,7 +16,7 @@ class gallery {
         });
       });
     } else {
-      // If editId is not provided, insert a new testimonial
+      // If editId is not provided, insert a new category
       return new Promise((resolve, reject) => {
         const insertQuery = 'INSERT INTO category(category_name) VALUES (?)';
         connection.query(insertQuery, [category_name], (insertError, insertResults) => {
@@ -32,7 +32,7 @@ class gallery {
 
     
   static getcategoryAll() {
-    const selectAllQuery = 'SELECT * FROM category';
+    const selectAllQuery = 'SELECT * FROM category where is_deleted =0';
     return new Promise((resolve, reject) => {
       connection.query(selectAllQuery, (error, results) => {
         if (error) {
@@ -52,7 +52,7 @@ class gallery {
           reject(error);
         } else {
           if (results.length === 0) {
-            resolve(null); // If no testimonial found with the given ID
+            resolve(null); // If no category found with the given ID
           } else {
             resolve(results[0]); // Assuming ID is unique, return the first result
           }
@@ -101,6 +101,34 @@ class gallery {
         }
       });
     });
+  }
+  static addImageGallery(detail) {
+    const {title,description,image,category_id ,editId} = detail;
+    if (editId > 0) {
+      // If editId is provided, update the existing category
+      return new Promise((resolve, reject) => {
+        const updateQuery = 'UPDATE image_gallery SET category_name = ? WHERE id = ?';
+        connection.query(updateQuery, [title,description,image,category_id ,editId], (updateError) => {
+          if (updateError) {
+            reject(updateError);
+          } else {
+            resolve({ updated: true, id: editId });
+          }
+        });
+      });
+    } else {
+      // If editId is not provided, insert a new category
+      return new Promise((resolve, reject) => {
+        const insertQuery = 'INSERT INTO image_gallery(title,description,image,category_id) VALUES (?,?,?,?)';
+        connection.query(insertQuery, [title,description,image,category_id ], (insertError, insertResults) => {
+          if (insertError) {
+            reject(insertError);
+          } else {
+            resolve({ inserted: true, id: insertResults.insertId });
+          }
+        });
+      });
+    }
   }
 
 }
