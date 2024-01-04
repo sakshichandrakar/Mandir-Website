@@ -1,12 +1,12 @@
 const connection = require("../db/conn");
 
-class gallery {
+class blog {
   static addCategory(detail) {
     const { category_name, editId } = detail;
     if (editId > 0) {
       // If editId is provided, update the existing category
       return new Promise((resolve, reject) => {
-        const updateQuery = 'UPDATE category SET category_name = ? WHERE id = ?';
+        const updateQuery = 'UPDATE blog_category SET category_name = ? WHERE id = ?';
         connection.query(updateQuery, [category_name, editId], (updateError) => {
           if (updateError) {
             reject(updateError);
@@ -18,7 +18,7 @@ class gallery {
     } else {
       // If editId is not provided, insert a new category
       return new Promise((resolve, reject) => {
-        const insertQuery = 'INSERT INTO category(category_name) VALUES (?)';
+        const insertQuery = 'INSERT INTO blog_category(category_name) VALUES (?)';
         connection.query(insertQuery, [category_name], (insertError, insertResults) => {
           if (insertError) {
             reject(insertError);
@@ -31,7 +31,7 @@ class gallery {
   }
 
   static getCategoryAll() {
-    const selectAllQuery = 'SELECT * FROM category where is_deleted =0';
+    const selectAllQuery = 'SELECT * FROM blog_category where is_deleted =0';
     return new Promise((resolve, reject) => {
       connection.query(selectAllQuery, (error, results) => {
         if (error) {
@@ -44,7 +44,7 @@ class gallery {
   }
 
   static findByCategoryId(id) {
-    const selectByIdQuery = 'SELECT * FROM category WHERE id = ?';
+    const selectByIdQuery = 'SELECT * FROM blog_category WHERE id = ?';
     return new Promise((resolve, reject) => {
       connection.query(selectByIdQuery, [id], (error, results) => {
         if (error) {
@@ -153,4 +153,4 @@ class gallery {
 }
 
 
-module.exports = gallery;
+module.exports = blog;
