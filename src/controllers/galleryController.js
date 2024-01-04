@@ -1,4 +1,6 @@
 const gallery = require('../models/gallery');
+const multer = require('multer');
+const path = require('path');
 
 const addCategory = async (req, res) => {
   try {
@@ -61,19 +63,36 @@ const getPujaGallery = async (req, res) => {
   }
 };
 
+// Set up multer for handling file uploads
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+      cb(null, 'public/uploads/'); // Set the destination folder for uploaded files
+  },
+  filename: function (req, file, cb) {
+      cb(null, Date.now() + path.extname(file.originalname)); // Set the filename with a timestamp
+  }
+});
+
+const upload = multer({ storage: storage });
+
+
 const addImageGallery = async (req, res) => {
   try {
-    const {title,description,image,category_id ,editId} = req.body;
-    const Test = {title,description,image,category_id ,editId };
-    const result = await gallery.addImageGallery(Test);
-    console.log(result);
-    
-    res.redirect('/image-gallery');
+    console.log(req);
+      const { title, description, category_id, editId } = req.body;
+
+      const uploadedFilePath = req.file ? req.file.path : undefined;
+
+      const Test = { title, description, image: uploadedFilePath, category_id, editId };
+      const result = await gallery.addImageGallery(Test);
+
+      res.redirect('/image-gallery');
   } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: 'Internal Server Error' });
+      console.error(error);
+      res.status(500).json({ error: 'Internal Server Error' });
   }
 };
+
 
 const getImageGalleryId = async (imageGalleryId) => {
   try {
@@ -93,5 +112,6 @@ module.exports = {
   getPujaCategory,
   getPujaGallery,
   addImageGallery,
-  getImageGalleryId
+  getImageGalleryId,
+  upload,
 };
