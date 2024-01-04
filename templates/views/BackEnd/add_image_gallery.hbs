@@ -7,6 +7,7 @@
 
 <body id="page-top">
 
+
     <!-- Page Wrapper -->
     <div id="wrapper">
 
@@ -56,6 +57,7 @@
                                     <div class="col-lg-6">
                                         <div class="form-group">
                                             <label class="form-label">Title</label>
+                                               
                                             <input type="text" class="form-control form-control-user"
                                                 placeholder="Enter Title..." name="title"
                                                 value="{{imageGalleryData.title}}">
@@ -159,5 +161,23 @@
     </script>
 
 </body>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function () {
+        // Get the selected value from {{ imageGalleryData.category_id }}
+        var selectedValue = "{{ imageGalleryData.category_id }}";
 
+        // Set the selected value in the <select> element
+        $('#category_id').val(selectedValue);
+
+        // Attach an event listener to the select element (optional)
+        $('#category_id').on('change', function () {
+            // Retrieve the selected value
+            var newSelectedValue = $(this).val();
+            
+            // Log or use the selected value as needed
+            console.log('Selected value:', newSelectedValue);
+        });
+    });
+</script>
 </html>
