@@ -78,6 +78,16 @@ const AddImageGallery = async (req, res) => {
   }
 };
 
+const getimageGalleryId = async (imageGalleryId) => {
+  try {
+    const imageGallery= await gallery.findByImageGalleryId(imageGalleryId);
+    return imageGallery;
+  } catch (error) {
+    console.error(error);
+    throw new Error('Internal Server Error');
+  }
+};
+
 module.exports = {
   Addcategory,
   getcategory,
@@ -85,5 +95,6 @@ module.exports = {
   getimagegallery,
   getPujaCategory,
   getPujaGallery,
-  AddImageGallery
+  AddImageGallery,
+  getimageGalleryId
 };

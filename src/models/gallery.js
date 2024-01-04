@@ -73,6 +73,7 @@ class gallery {
       });
     });
   }
+
   static getPujaCategoryAll() {
     const PujaAllCategory =  `SELECT category.id, category.category_name
     FROM category
@@ -90,6 +91,7 @@ class gallery {
     });
 
   }
+
   static getPujaGalleryAll() {
     const pujaimages = `SELECT * from image_gallery`;
     return new Promise((resolve, reject) => {
@@ -102,6 +104,7 @@ class gallery {
       });
     });
   }
+
   static addImageGallery(detail) {
     const {title,description,image,category_id ,editId} = detail;
     if (editId > 0) {
@@ -129,6 +132,23 @@ class gallery {
         });
       });
     }
+  }
+
+  static findByImageGalleryId(id) {
+    const selectByIdQuery = 'SELECT * FROM image_gallery WHERE id = ?';
+    return new Promise((resolve, reject) => {
+      connection.query(selectByIdQuery, [id], (error, results) => {
+        if (error) {
+          reject(error);
+        } else {
+          if (results.length === 0) {
+            resolve(null); // If no category found with the given ID
+          } else {
+            resolve(results[0]); // Assuming ID is unique, return the first result
+          }
+        }
+      });
+    });
   }
 
 }
