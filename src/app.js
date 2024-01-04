@@ -9,6 +9,7 @@ const galleryController = require('./controllers/galleryController');
 
 
 const app = express();
+//const exphbs = require('express-handlebars');
 require("./db/conn");
 const port = process.env.PORT || 4000;
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -251,6 +252,17 @@ app.get("/add-image-gallery", async (req,res) =>{
 app.get("/image-gallery", async (req,res) =>{
   const galleryData = await galleryController.getimagegallery();
   res.render("BackEnd/image_gallery",{galleryData, title: "Image Gallery"});
+});
+
+app.get('/edit-image-gallery', async (req, res) => {
+  const imageGalleryId = req.query.id;
+  const imageGalleryData = await galleryController.getimageGalleryId(imageGalleryId);
+  const categoryAll = await galleryController.getcategory();
+
+  try {
+     res.render("BackEnd/add_image_gallery",{imageGalleryData,categoryAll, title: "Edit category"});
+  } catch (error) {
+    res.render("FrontEnd/404", { title: "Error Page",webDetail, message: "Internal Server Error"});  }
 });
 
 app.get("*", async(req,res) =>{

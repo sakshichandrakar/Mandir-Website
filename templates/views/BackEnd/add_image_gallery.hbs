@@ -27,7 +27,7 @@
                     <div class="card shadow mb-4">
                         <div class="card-body">
                             <h1 class="h3 mb-2 text-gray-800">
-                                {{#if testimonial_data.id}}
+                                {{#if imageGalleryData.id}}
                                 Edit Image Gallery
                                 {{else}}
                                 Add Image Gallery
@@ -37,15 +37,19 @@
                                     </a></span>
                             </h1>
                             <form class="user" action="/add-image-gallery" method="POST">
-                                <input type="hidden" name="editId" value="{{testimonial_data.id}}">
+                                <input type="hidden" name="editId" value="{{imageGalleryData.id}}">
                                 <div class="row">
                                     <div class="col-lg-6">
                                         <div class="form-group">
                                             <label class="form-label">Category</label>
                                             <select class="form-control" id="category_id" name="category_id">
+                                                <option value="" >Select Category</option>
+                                                {{!-- {{#if (equal imageGalleryData.category_id data.id)}}selected{{/if}} --}}
                                                 {{#each categoryAll as |data|}}
-                                                <option value="{{data.id}}">{{data.category_name}}</option>
-                                                {{/each}}
+                                                        <option value="{{data.id}}" >{{data.category_name}}</option>
+                                                    {{/each}}
+
+
                                             </select>
                                         </div>
                                     </div>
@@ -54,7 +58,7 @@
                                             <label class="form-label">Title</label>
                                             <input type="text" class="form-control form-control-user"
                                                 placeholder="Enter Title..." name="title"
-                                                value="">
+                                                value="{{imageGalleryData.title}}">
                                         </div>
                                     </div>
                                     <div class="col-lg-6">
@@ -62,7 +66,7 @@
                                             <label class="form-label">Description</label>
                                             <textarea class="form-control form-control-user"
                                                 placeholder="Enter Description..." id="description"
-                                                name="description"></textarea>
+                                                name="description">{{imageGalleryData.description}}</textarea>
                                         </div>
                                     </div>
                                     <div class="col-lg-6">
