@@ -30,7 +30,7 @@ class gallery {
     }
   }
 
-    
+
   static getcategoryAll() {
     const selectAllQuery = 'SELECT * FROM category where is_deleted =0';
     return new Promise((resolve, reject) => {
@@ -62,7 +62,7 @@ class gallery {
   }
 
   static getImageGalleryAll() {
-    const selectAllQuery = 'SELECT * FROM image_gallery';
+    const selectAllQuery = 'SELECT image_gallery.id, image_gallery.title,image_gallery.image, image_gallery.description, category.id AS category_id, category.category_name FROM image_gallery LEFT JOIN category ON image_gallery.category_id = category.id;';
     return new Promise((resolve, reject) => {
       connection.query(selectAllQuery, (error, results) => {
         if (error) {
@@ -75,7 +75,7 @@ class gallery {
   }
 
   static getPujaCategoryAll() {
-    const PujaAllCategory =  `SELECT category.id, category.category_name
+    const PujaAllCategory = `SELECT category.id, category.category_name
     FROM category
     INNER JOIN image_gallery ON category.id = image_gallery.category_id
     WHERE category.is_active = 0 AND category.is_deleted = 0
@@ -106,12 +106,12 @@ class gallery {
   }
 
   static addImageGallery(detail) {
-    const {title,description,image,category_id ,editId} = detail;
+    const { title, description, image, category_id, editId } = detail;
     if (editId > 0) {
       // If editId is provided, update the existing category
       return new Promise((resolve, reject) => {
-        const updateQuery = 'UPDATE image_gallery SET category_name = ? WHERE id = ?';
-        connection.query(updateQuery, [title,description,image,category_id ,editId], (updateError) => {
+        const updateQuery = 'UPDATE image_gallery SET title= ?,description=?,image=?,category_id=? WHERE id = ?';
+        connection.query(updateQuery, [title, description, image, category_id, editId], (updateError) => {
           if (updateError) {
             reject(updateError);
           } else {
@@ -123,7 +123,7 @@ class gallery {
       // If editId is not provided, insert a new category
       return new Promise((resolve, reject) => {
         const insertQuery = 'INSERT INTO image_gallery(title,description,image,category_id) VALUES (?,?,?,?)';
-        connection.query(insertQuery, [title,description,image,category_id ], (insertError, insertResults) => {
+        connection.query(insertQuery, [title, description, image, category_id], (insertError, insertResults) => {
           if (insertError) {
             reject(insertError);
           } else {

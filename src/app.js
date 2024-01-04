@@ -40,7 +40,10 @@ const fetchData = async () => {
     try {
       let webDetail = await fetchData(); 
       const testimonial_data = await testimonialController.gettestimonial();
-      res.render("FrontEnd/index", { title: "Home", webDetail,testimonial_data});
+      const categoryAll = await galleryController.getPujaCategory();
+      const galleryPujadata = await galleryController.getPujaGallery();
+
+      res.render("FrontEnd/index", { title: "Home", webDetail,testimonial_data,categoryAll,galleryPujadata});
     } catch (error) {
       res.render("FrontEnd/404", { title: "Error Page",webDetail, message: "Internal Server Error"});    }
   });
