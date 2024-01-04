@@ -27,37 +27,58 @@
 
                      <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                           <h1 class="h3 mb-2 text-gray-800">Add Testimonials <span class="float-right"><a href="add-testimonial" class="btn btn-primary btn-user btn-block" >
-                                   Add Testimonial
-                                </a></span> </h1>
+                           <h1 class="h3 mb-2 text-gray-800">Blog Category</h1>
                         </div>
+                        
                         <div class="card-body">
+                             <form class="user" action="/add-blog-category" method="POST">
+                                    <input type="hidden" name="editId" value="{{blogCategoryEditData.id}}">
+                                    <div class="row">
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label class="form-label" >Category Name</label>
+
+                                                <input type="text" class="form-control form-control-user"
+                                                placeholder="Enter Name..." name="category_name" value="{{blogCategoryEditData.category_name}}">
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="col-lg-2 mb-5">
+                                            <div class="form-group py-4">
+                                                <button class="btn btn-primary btn-user btn-block" type="submit">
+                                                Save
+                                                </button>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </form>
                             <div class="table-responsive">
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                     <thead>
                                         <tr>
-                                            <th>Name</th>
-                                            <th>Message</th>
+                                            <th>Category Name</th>
+                                            <th>Status</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
                                     <tfoot>
                                         <tr>
-                                            <th>Name</th>
-                                            <th>Message</th>
+                                            <th>Category Name</th>
+                                            <th>Statue</th>
                                             <th>Action</th>
                                         </tr>
                                     </tfoot>
                                     <tbody>
-                                        {{#each testimonial_data as |data|}}
+                                        {{#each blogCategoryData as |data|}}
                                         <tr>
-                                            <td>{{data.name}}</td>
-                                            <td>{{data.message}}</td>
+                                            <td>{{data.category_name}}</td>
+                                            <td>Status</td>
                                             <td>
-                                                <span class="d-flex"><a href="add-testimonial" class="btn btn-danger btn-circle btn-sm m-0">
+                                                <span class="d-flex"><a href="add-category" class="btn btn-danger btn-circle btn-sm m-0">
                                                   <i class="fas fa-trash"></i>
                                                 </a>
-                                                <a href="/testimonialedit?id={{data.id}}" class="btn btn-primary btn-circle btn-sm">
+                                                <a href="/edit-blog-category?id={{data.id}}" class="btn btn-primary btn-circle btn-sm">
                                                   <i class="fas fa-edit"></i>
                                                 </a></span>
                                             </td>

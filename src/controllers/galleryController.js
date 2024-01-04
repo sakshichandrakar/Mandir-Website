@@ -1,22 +1,19 @@
 const gallery = require('../models/gallery');
 
-const Addcategory = async (req, res) => {
+const addCategory = async (req, res) => {
   try {
     const {category_name ,editId} = req.body;
     const Test = {category_name,editId };
-    const result = await gallery.addCategory(Test);
-    console.log(result);
-    
+    const result = await gallery.addCategory(Test);    
     res.redirect('/category');
   } catch (error) {
-    console.error(error);
     res.status(500).json({ error: 'Internal Server Error' });
   }
 };
 
-const getcategory = async (req, res) => {
+const getCategory = async (req, res) => {
   try {
-    const categorydata = await gallery.getcategoryAll();
+    const categorydata = await gallery.getCategoryAll();
     return categorydata;
   } catch (error) {
     console.error(error);
@@ -24,7 +21,7 @@ const getcategory = async (req, res) => {
   }
 };
 
-const getcategoryId = async (categoryId) => {
+const getCategoryId = async (categoryId) => {
   try {
     const category= await gallery.findByCategoryId(categoryId);
     return category;
@@ -34,7 +31,7 @@ const getcategoryId = async (categoryId) => {
   }
 };
 
-const getimagegallery = async (req, res) => {
+const getImagegallery = async (req, res) => {
   try {
     const imageGalleryData = await gallery.getImageGalleryAll();
     return imageGalleryData;
@@ -64,7 +61,7 @@ const getPujaGallery = async (req, res) => {
   }
 };
 
-const AddImageGallery = async (req, res) => {
+const addImageGallery = async (req, res) => {
   try {
     const {title,description,image,category_id ,editId} = req.body;
     const Test = {title,description,image,category_id ,editId };
@@ -78,7 +75,7 @@ const AddImageGallery = async (req, res) => {
   }
 };
 
-const getimageGalleryId = async (imageGalleryId) => {
+const getImageGalleryId = async (imageGalleryId) => {
   try {
     const imageGallery= await gallery.findByImageGalleryId(imageGalleryId);
     return imageGallery;
@@ -89,12 +86,12 @@ const getimageGalleryId = async (imageGalleryId) => {
 };
 
 module.exports = {
-  Addcategory,
-  getcategory,
-  getcategoryId,
-  getimagegallery,
+  addCategory,
+  getCategory,
+  getCategoryId,
+  getImagegallery,
   getPujaCategory,
   getPujaGallery,
-  AddImageGallery,
-  getimageGalleryId
+  addImageGallery,
+  getImageGalleryId
 };
