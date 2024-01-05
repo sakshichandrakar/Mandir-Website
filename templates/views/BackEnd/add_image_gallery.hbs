@@ -37,17 +37,17 @@
                                         List Image Gallery
                                     </a></span>
                             </h1>
-                            <form class="user" action="/add-image-gallery" method="POST">
+                            <form class="user" action="/add-image-gallery" method="POST" enctype="multipart/form-data">
                                 <input type="hidden" name="editId" value="{{imageGalleryData.id}}">
                                 <div class="row">
                                     <div class="col-lg-6">
                                         <div class="form-group">
                                             <label class="form-label">Category</label>
                                             <select class="form-control" id="category_id" name="category_id">
-                                                <option value="" >Select Category</option>
+                                                <option value="">Select Category</option>
                                                 {{#each categoryAll as |data|}}
-                                                        <option value="{{data.id}}" >{{data.category_name}}</option>
-                                                    {{/each}}
+                                                <option value="{{data.id}}">{{data.category_name}}</option>
+                                                {{/each}}
                                             </select>
                                         </div>
                                     </div>
@@ -68,17 +68,22 @@
                                         </div>
                                     </div>
                                     <div class="col-lg-6">
-                                       <div class="form-group my-5">
+                                        <div class="form-group my-5">
                                             <div class="button-wrapper">
-                                                <label for="upload" class="btn btn-primary me-2 mb-4" tabindex="0">
+                                                <label for="image" class="btn btn-primary me-2 mb-4" tabindex="0">
                                                     <span class="d-none d-sm-block">Upload new photo</span>
                                                     <i class="bx bx-upload d-block d-sm-none"></i>
-                                                    <input type="file" id="upload" name="logo" class="account-file-input" hidden
+                                                    <input type="file" id="image" name="image"
+                                                        class="account-file-input" hidden
                                                         accept=".jpg, .jpeg, .png, .JPG, .JPEG, .PNG" />
-                                                </label>   
-                                                <span class="text-muted mb-0">Allowed JPG, GIF or PNG. Max size of 800K</span>    
-                                                <img src="BackEnd/img/undraw_profile.svg" alt="user-avatar" class="d-block rounded" height="100" width="100" id="uploadedAvatar" />       
+                                                </label>
+                                                <span class="text-muted mb-0">Allowed JPG, GIF, or PNG. Max size of
+                                                    800K</span>
+                                                <img src="{{ 'BackEnd/img/undraw_profile.svg'}}" alt="user-avatar"
+                                                    class="d-block rounded" height="100" width="100"
+                                                    id="uploadedAvatar" />
                                             </div>
+
                                         </div>
                                     </div>
                                     <div class="col-lg-2">
@@ -145,4 +150,5 @@
         });
     });
 </script>
+
 </html>

@@ -9,11 +9,13 @@ const galleryController = require('./controllers/galleryController');
 const blogController = require('./controllers/blogController');
 
 
+
 const app = express();
 require("./db/conn");
 const port = process.env.PORT || 4000;
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+//app.use("/uploads", express.static(path.join(__dirname, "public/uploads")));
 
 
 
@@ -242,7 +244,9 @@ app.post("/admin-login", loginController.login);
 app.post('/testimonial', testimonialController.addTestimonial);
 app.get("/testimonial-list", testimonialController.getTestimonial);
 app.post('/category', galleryController.addCategory);
-app.post('/add-image-gallery', galleryController.addImageGallery);
+//app.post('/add-image-gallery', galleryController.addImageGallery);
+// Attach middleware to the route
+app.post('/add-image-gallery', galleryController.upload.single('image'), galleryController.addImageGallery);
 
 app.get("/category", async (req,res) =>{
   const category_data = await galleryController.getCategory();

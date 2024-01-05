@@ -1,4 +1,14 @@
-/node_modules
+# Ignore Node.js modules
+node_modules/
+
+# Ignore the entire /src/db/ directory
 /src/db/*
+
+# Ignore a specific file in the /src/db/ directory
 /src/db/conn.js
-/package-lock.json
+
+# Ignore package lock files
+package-lock.json
+
+# Ignore the /uploads directory
+/public/uploads/
