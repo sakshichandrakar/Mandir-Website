@@ -267,13 +267,14 @@
 
       <div class="section-title text-start flex-title">
         <div>
-          <p class="subtitle">Puja</p>
-          <h4 class="title mb-lg-0">Our Puja</h4>
+          <p class="subtitle">Gallery</p>
+          <h4 class="title mb-lg-0">Our Gallery</h4>
         </div>
         <div class="text-center filter-items me-0 mb-0">
-          {{#each categoryAll as |data|}}
-        <h5 class="portfolio-trigger" data-filter=".{{data.id}}">{{data.category_name}}</h5>
-        {{/each}}
+            <h5 class="active portfolio-trigger" data-filter="*">All</h5>
+            {{#each categoryAll as |data|}}
+                <h5 class="portfolio-trigger" data-filter=".{{data.id}}">{{data.category_name}}</h5>
+            {{/each}}
         </div>
       </div>
 
@@ -281,7 +282,7 @@
         {{#each galleryPujadata as |data|}}
         <div class="col-lg-4 {{data.category_id}}">
           <div class="sigma_portfolio-item">
-            <img src="{{data.image}}" alt="portfolio">
+            <img src="uploads/{{data.image}}" alt="portfolio">
             <div class="sigma_portfolio-item-content">
               <div class="sigma_portfolio-item-content-inner">
                 <h5> <a href="puja-details"> {{data.title}} </a> </h5>

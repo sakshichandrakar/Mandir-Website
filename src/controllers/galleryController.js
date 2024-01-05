@@ -81,7 +81,7 @@ const addImageGallery = async (req, res) => {
     console.log(req);
       const { title, description, category_id, editId } = req.body;
 
-      const uploadedFilePath = req.file ? req.file.path : undefined;
+      const uploadedFilePath = req.file ? req.file.filename : undefined;
 
       const Test = { title, description, image: uploadedFilePath, category_id, editId };
       const result = await gallery.addImageGallery(Test);
