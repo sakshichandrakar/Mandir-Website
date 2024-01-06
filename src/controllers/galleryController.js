@@ -78,14 +78,10 @@ const upload = multer({ storage: storage });
 
 const addImageGallery = async (req, res) => {
   try {
-    console.log(req);
       const { title, description, category_id, editId } = req.body;
-
-      const uploadedFilePath = req.file ? req.file.filename : undefined;
-
+      const uploadedFilePath = req.file ? req.file.filename : "";
       const Test = { title, description, image: uploadedFilePath, category_id, editId };
       const result = await gallery.addImageGallery(Test);
-
       res.redirect('/image-gallery');
   } catch (error) {
       console.error(error);

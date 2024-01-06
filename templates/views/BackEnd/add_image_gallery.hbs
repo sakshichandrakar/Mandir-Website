@@ -56,7 +56,7 @@
                                             <label class="form-label">Title</label>
                                             <input type="text" class="form-control form-control-user"
                                                 placeholder="Enter Title..." name="title"
-                                                value="{{imageGalleryData.title}}">
+                                                value="{{imageGalleryData.title}}" required="required">
                                         </div>
                                     </div>
                                     <div class="col-lg-6">
@@ -75,11 +75,11 @@
                                                     <i class="bx bx-upload d-block d-sm-none"></i>
                                                     <input type="file" id="image" name="image"
                                                         class="account-file-input" hidden
-                                                        accept=".jpg, .jpeg, .png, .JPG, .JPEG, .PNG" />
+                                                        accept=".jpg, .jpeg, .png, .JPG, .JPEG, .PNG"  {{#if imageGalleryData.id}} "" {{else}}required="required" {{/if}}/>
                                                 </label>
                                                 <span class="text-muted mb-0">Allowed JPG, GIF, or PNG. Max size of
                                                     800K</span>
-                                                <img src="{{ 'BackEnd/img/undraw_profile.svg'}}" alt="user-avatar"
+                                                <img src="uploads/{{imageGalleryData.image}}" alt="user-avatar"
                                                     class="d-block rounded" height="100" width="100"
                                                     id="uploadedAvatar" />
                                             </div>

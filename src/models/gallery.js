@@ -106,11 +106,20 @@ class gallery {
 
   static addImageGallery(detail) {
     const { title, description, image, category_id, editId } = detail;
+  
     if (editId > 0) {
-      // If editId is provided, update the existing category
       return new Promise((resolve, reject) => {
-        const updateQuery = 'UPDATE image_gallery SET title= ?,description=?,image=?,category_id=? WHERE id = ?';
-        connection.query(updateQuery, [title, description, image, category_id, editId], (updateError) => {
+        let updateQuery, updateParams;
+  
+        if (image === "") {
+          updateQuery = 'UPDATE image_gallery SET title=?, description=?, category_id=? WHERE id=?';
+          updateParams = [title, description, category_id, editId];
+        } else {
+          updateQuery = 'UPDATE image_gallery SET title=?, description=?, image=?, category_id=? WHERE id=?';
+          updateParams = [title, description, image, category_id, editId];
+        }
+  
+        connection.query(updateQuery, updateParams, (updateError) => {
           if (updateError) {
             reject(updateError);
           } else {
@@ -119,9 +128,8 @@ class gallery {
         });
       });
     } else {
-      // If editId is not provided, insert a new category
       return new Promise((resolve, reject) => {
-        const insertQuery = 'INSERT INTO image_gallery(title,description,image,category_id) VALUES (?,?,?,?)';
+        const insertQuery = 'INSERT INTO image_gallery(title, description, image, category_id) VALUES (?,?,?,?)';
         connection.query(insertQuery, [title, description, image, category_id], (insertError, insertResults) => {
           if (insertError) {
             reject(insertError);
@@ -132,6 +140,7 @@ class gallery {
       });
     }
   }
+  
 
   static findByImageGalleryId(id) {
     const selectByIdQuery = 'SELECT * FROM image_gallery WHERE id = ?';
