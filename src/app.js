@@ -43,7 +43,7 @@ app.get("", async (req, res) => {
     let webDetail = await fetchData(); 
     const testimonial_data = await testimonialController.getTestimonial();
     const categoryAll = await galleryController.getPujaCategory();
-    const galleryPujadata = await galleryController.getPujaGallery();
+    const galleryPujadata = await galleryController.getPujaGallery('6');
 
     res.render("FrontEnd/index", { title: "Home", webDetail,testimonial_data,categoryAll,galleryPujadata});
   } catch (error) {
@@ -214,8 +214,9 @@ app.get("/add-volunteers", (req,res) =>{
     res.render("BackEnd/add_volunteers",{ title: "Add Volunteers"});
 });
 
-app.get("/web-details", (req,res) =>{
-    res.render("BackEnd/web_detail",{ title: "Web Details"});
+app.get("/web-details", async(req,res) =>{
+  let webDetail = await fetchData(); 
+    res.render("BackEnd/web_detail",{ title: "Web Details",webDetail});
 });
 
 app.get("/testimonial", async (req,res) =>{
@@ -239,7 +240,6 @@ app.get('/testimonialedit', async (req, res) => {
 });
 
 app.post('/web-details', webDetailController.createWebDetail);
-app.get("/web-details-data", webDetailController.getWebDetails);
 app.post("/admin-login", loginController.login);
 app.post('/testimonial', testimonialController.addTestimonial);
 app.get("/testimonial-list", testimonialController.getTestimonial);

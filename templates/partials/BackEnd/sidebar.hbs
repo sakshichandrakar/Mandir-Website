@@ -27,7 +27,7 @@
             </div>
 
             <!-- Nav Item - Pages Collapse Menu -->
-              <li class="nav-item">
+              <li class="nav-item active">
                 <a class="nav-link" href="add-volunteers">
                     <i class="fas fa-fw fa-table"></i>
                     <span>Volunteers</span></a>
@@ -44,12 +44,13 @@
             </li>
 
              <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseGallery"
+                {{!-- collapsed --}}
+                <a class="nav-link " href="#" data-toggle="collapse" data-target="#collapseGallery"
                     aria-expanded="true" aria-controls="collapseGallery">
                     <i class="fas fa-fw fa-wrench"></i>
                     <span>Gallery</span>
                 </a>
-                <div id="collapseGallery" class="collapse" aria-labelledby="headingUtilities"
+                <div id="collapseGallery" class="collapse show" aria-labelledby="headingUtilities"
                     data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <a class="collapse-item" href="category">Category</a>
