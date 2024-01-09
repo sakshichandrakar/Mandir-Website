@@ -13,16 +13,6 @@ const createWebDetail = async (req, res) => {
   }
 };
 
-const getWebDetails = async (req, res) => {
-  try {
-    const webDetails = await WebDetail.getAll();
-    res.json(webDetails);
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: 'Internal Server Error' });
-  }
-};
-
 const getWebDetailsAll = async () => {
   try {
     const webDetails = await WebDetail.getAll();
@@ -35,6 +25,5 @@ const getWebDetailsAll = async () => {
 
 module.exports = {
   createWebDetail,
-  getWebDetails,
   getWebDetailsAll
 };

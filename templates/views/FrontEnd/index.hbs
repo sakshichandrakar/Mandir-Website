@@ -272,8 +272,8 @@
         </div>
         <div class="text-center filter-items me-0 mb-0">
             <h5 class="active portfolio-trigger" data-filter="*">All</h5>
-            {{#each categoryAll as |data|}}
-                <h5 class="portfolio-trigger" data-filter=".{{data.id}}">{{data.category_name}}</h5>
+            {{#each galleryPujadata as |data|}}
+                <h5 class="portfolio-trigger" data-filter=".{{data.category_id}}">{{data.category_name}}</h5>
             {{/each}}
         </div>
       </div>

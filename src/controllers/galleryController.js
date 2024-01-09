@@ -53,9 +53,9 @@ const getPujaCategory = async (req, res) => {
   }
 };
 
-const getPujaGallery = async (req, res) => {
+const getPujaGallery = async (limit ='') => {
   try {
-    const pujaGalleryData = await gallery.getPujaGalleryAll();
+    const pujaGalleryData = await gallery.getPujaGalleryAll(limit);
     return pujaGalleryData;
   } catch (error) {
     console.error(error);
