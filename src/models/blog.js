@@ -133,8 +133,8 @@ class blog {
     }
   }
 
-  static findByImageGalleryId(id) {
-    const selectByIdQuery = 'SELECT * FROM image_gallery WHERE id = ?';
+  static findByBlogId(id) {
+    const selectByIdQuery = 'SELECT * FROM blogs WHERE id = ?';
     return new Promise((resolve, reject) => {
       connection.query(selectByIdQuery, [id], (error, results) => {
         if (error) {
@@ -150,7 +150,48 @@ class blog {
     });
   }
 
+  static addNewBlog(detail) {
+    const { category_id,title,dateOfBlog,description,editId  } = detail;
+    if (editId > 0) {
+      // If editId is provided, update the existing category
+      return new Promise((resolve, reject) => {
+        const updateQuery = 'UPDATE image_gallery SET title= ?,description=?,image=?,category_id=? WHERE id = ?';
+        connection.query(updateQuery, [category_id,title,dateOfBlog,description,editId ], (updateError) => {
+          if (updateError) {
+            reject(updateError);
+          } else {
+            resolve({ updated: true, id: editId });
+          }
+        });
+      });
+    } else {
+      // If editId is not provided, insert a new category
+      return new Promise((resolve, reject) => {
+        const insertQuery = 'INSERT INTO blogs(category_id,title,dateOfBlog,description ) VALUES (?,?,?,?)';
+        connection.query(insertQuery, [category_id,title,dateOfBlog,description], (insertError, insertResults) => {
+          if (insertError) {
+            reject(insertError);
+          } else {
+            resolve({ inserted: true, id: insertResults.insertId });
+          }
+        });
+      });
+    }
+  }
+  static getBlogList() {
+    const blogs_list = `SELECT * from blogs`;
+    return new Promise((resolve, reject) => {
+      connection.query(blogs_list, (error, results) => {
+        if (error) {
+          reject(error);
+        } else {
+          resolve(results);
+        }
+      });
+    });
+  }
 }
+
 
 
 module.exports = blog;

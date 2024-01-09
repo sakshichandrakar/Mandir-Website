@@ -31,10 +31,10 @@ const getBlogCategoryId = async (blogCategoryId) => {
   }
 };
 
-const getblogList = async (req, res) => {
+const getBlogList = async (req, res) => {
   try {
-    const imageGalleryData = await blog.getImageGalleryAll();
-    return imageGalleryData;
+    const blogListData = await blog.getBlogList();
+    return blogListData;
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: 'Internal Server Error' });
@@ -43,22 +43,22 @@ const getblogList = async (req, res) => {
 
 const addBlog = async (req, res) => {
   try {
-    const {title,description,image,category_id ,editId} = req.body;
-    const Test = {title,description,image,category_id ,editId };
-    const result = await blog.addImageGallery(Test);
+    const {category_id,title,dateOfBlog,description,editId} = req.body;
+    const Test = {category_id,title,dateOfBlog,description,editId };
+    const result = await blog.addNewBlog(Test);
     console.log(result);
     
-    res.redirect('/image-gallery');
+    res.redirect('/blog-list');
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: 'Internal Server Error' });
   }
 };
 
-const getBlogId = async (imageGalleryId) => {
+const getBlogId = async (blogId) => {
   try {
-    const imageGallery= await blog.findByImageGalleryId(imageGalleryId);
-    return imageGallery;
+    const blogId= await blog.findByBlogId(BlogId);
+    return blogId;
   } catch (error) {
     console.error(error);
     throw new Error('Internal Server Error');
@@ -69,7 +69,7 @@ module.exports = {
   addCBlogategory,
   getBlogategory,
   getBlogCategoryId,
-  getblogList,
+  getBlogList,
   addBlog,
   getBlogId
 };

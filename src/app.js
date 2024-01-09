@@ -247,6 +247,7 @@ app.post('/category', galleryController.addCategory);
 //app.post('/add-image-gallery', galleryController.addImageGallery);
 // Attach middleware to the route
 app.post('/add-image-gallery', galleryController.upload.single('image'), galleryController.addImageGallery);
+app.post('/add-blog', blogController.addBlog);
 
 app.get("/category", async (req,res) =>{
   const category_data = await galleryController.getCategory();
@@ -310,7 +311,7 @@ app.get("/add-blog", async (req,res) =>{
 });
 
 app.get("/blog-list", async (req,res) =>{
-  const blogData = await blogController.getblogList();
+  const blogData = await blogController.getBlogList();
   res.render("BackEnd/blog_list",{blogData, title: "Blog List"});
 });
 
