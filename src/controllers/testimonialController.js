@@ -1,6 +1,6 @@
 const testimonials = require('../models/testimonials');
 
-const Addtestimonial = async (req, res) => {
+const addTestimonial = async (req, res) => {
   try {
     const { name, message ,editId} = req.body;
     const Test = { name, message,editId };
@@ -13,7 +13,7 @@ const Addtestimonial = async (req, res) => {
   }
 };
 
-const gettestimonial = async (req, res) => {
+const getTestimonial = async (req, res) => {
   try {
     const testimonialsdata = await testimonials.getAll();
     return testimonialsdata;
@@ -23,7 +23,7 @@ const gettestimonial = async (req, res) => {
   }
 };
 
-const gettestimonialId = async (testimonialId) => {
+const getTestimonialId = async (testimonialId) => {
   try {
     const testimonial = await testimonials.findById(testimonialId);
     return testimonial;
@@ -34,7 +34,7 @@ const gettestimonialId = async (testimonialId) => {
 };
 
 module.exports = {
-  Addtestimonial,
-  gettestimonial,
-  gettestimonialId
+  addTestimonial,
+  getTestimonial,
+  getTestimonialId
 };

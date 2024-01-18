@@ -89,56 +89,6 @@
     </a>
 
    {{>BackEnd/footerLink}}
-   <script>
-    'use strict';    
-    document.addEventListener('DOMContentLoaded', function(e) {
-        (function() {
-            const deactivateAcc = document.querySelector('#formAccountDeactivation');
-            // Update/reset user image of account page
-            let accountUserImage = document.getElementById('uploadedAvatar');
-            const fileInput = document.querySelector('.account-file-input'),
-                resetFileInput = document.querySelector('.account-image-reset');
-            if (accountUserImage) {
-                const resetImage = accountUserImage.src;
-                fileInput.onchange = () => {
-                    if (fileInput.files[0]) {
-                        accountUserImage.src = window.URL.createObjectURL(fileInput.files[0]);
-                    }
-                };
-            }
-        })();
-    });
-     </script>
-     <!-- Add this script to your HTML template or include it in a separate JavaScript file -->
-<script>
-    document.addEventListener('DOMContentLoaded', async function () {
-        try {
-            const response = await fetch('http://localhost:4000/web-details-data');
-            console.log(response);
-            const webDetails = await response.json();
-
-            webDetails.forEach(detail => {
-                var emailInput = document.getElementById("exampleInputEmail");
-                var mobile_no = document.getElementById("mobile_no");
-                var instagram = document.getElementById("instagram");
-                var twitter = document.getElementById("twitter");
-                var facebook = document.getElementById("facebook");
-                var youtube = document.getElementById("youtube");
-                var address = document.getElementById("address");
-
-                emailInput.value = detail.email;
-                mobile_no.value = detail.mobile_no;
-                instagram.value = detail.instagram_link;
-                twitter.value = detail.twitter_link;
-                facebook.value = detail.facebook_link;
-                youtube.value = detail.youtube_link;
-                address.value = detail.address;
-            });
-        } catch (error) {
-            console.error('Error fetching web details:', error);
-        }
-    });
-</script>
 
 </body>
 

@@ -1,4 +1,3 @@
-// controllers/webDetailController.js
 const WebDetail = require('../models/webDetail');
 
 const createWebDetail = async (req, res) => {
@@ -6,7 +5,6 @@ const createWebDetail = async (req, res) => {
     const { email, mobile_no, instagram_link, twitter_link, facebook_link, youtube_link, address } = req.body;
     const webDetail = { email, mobile_no, instagram_link, twitter_link, facebook_link, youtube_link, address };
     const result = await WebDetail.create(webDetail);
-    //res.json({ id: result, ...webDetail });
     res.redirect('/web-details');
 
   } catch (error) {
@@ -15,17 +13,7 @@ const createWebDetail = async (req, res) => {
   }
 };
 
-const getWebDetails = async (req, res) => {
-  try {
-    const webDetails = await WebDetail.getAll();
-    res.json(webDetails);
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: 'Internal Server Error' });
-  }
-};
-
-const getWebDetailsWithoutExpress = async () => {
+const getWebDetailsAll = async () => {
   try {
     const webDetails = await WebDetail.getAll();
     return webDetails;
@@ -37,6 +25,5 @@ const getWebDetailsWithoutExpress = async () => {
 
 module.exports = {
   createWebDetail,
-  getWebDetails,
-  getWebDetailsWithoutExpress
+  getWebDetailsAll
 };

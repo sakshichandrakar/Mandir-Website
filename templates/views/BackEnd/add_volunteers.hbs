@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+{{>BackEnd/headerLink}}
+</head>
+
+<body id="page-top">
+
+    <!-- Page Wrapper -->
+    <div id="wrapper">
+
+        {{>BackEnd/sidebar}}
+
+        <!-- Content Wrapper -->
+        <div id="content-wrapper" class="d-flex flex-column">
+
+            <!-- Main Content -->
+            <div id="content">
+
+                {{>BackEnd/topbar}}
+
+               <!-- Begin Page Content -->
+                <div class="container-fluid">
+
+                    <!-- Page Heading -->
+                    <div class="card shadow mb-4">
+                        <div class="card-body">
+                            <h1 class="h3 mb-2 text-gray-800">Add Volunteer Details </h1>
+                            <form class="user">
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label class="form-label" >Name</label>
+                                            <input type="text" class="form-control form-control-user"
+                                                placeholder="Enter Name..." id="twitter" name="name">
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label class="form-label" >Email</label>
+                                            <input type="email" class="form-control form-control-user"
+                                                id="exampleInputEmail" aria-describedby="emailHelp"
+                                                placeholder="Enter Email Address..." name="email">
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label class="form-label" >Mobile No</label>
+                                            <input type="number" class="form-control form-control-user"
+                                                placeholder="Enter Mobile No..." id="mobile_no" name="mobile_no">
+                                        </div>
+                                    </div>                                    
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label class="form-label" >Instagram Link</label>
+                                            <input type="link" class="form-control form-control-user"
+                                                placeholder="Enter Instagram Link..." id="instagram" name="instagram">
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label class="form-label" >Twitter Link</label>
+                                            <input type="link" class="form-control form-control-user"
+                                                placeholder="Enter Twitter..." id="twitter" name="twitter">
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label class="form-label" >Facebook Link</label>
+                                            <input type="link" class="form-control form-control-user"
+                                                placeholder="Enter Facebook..." id="facebook" name="facebook">
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label class="form-label" >Address</label>
+                                            <textarea class="form-control form-control-user" placeholder="Enter Email Address..." id="address" name="address"></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-12">
+                                        <div class="form-group">
+                                            <label class="form-label" >About</label>
+                                            <textarea class="form-control form-control-user" placeholder="Enter About..." name="about" id="about"></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-12">
+                                        <div class="form-group">
+                                            <label class="form-label" >Skills</label>
+                                            <textarea class="form-control form-control-user" placeholder="Enter Skills..." name="skills" id="skills"></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-2">
+                                        <div class="form-group my-5">
+                                            <button class="btn btn-primary btn-user btn-block" type="button">
+                                               Save
+                                            </button>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </form>
+                        </div>
+                    </div>                 
+                </div>
+                <!-- /.container-fluid -->
+
+            </div>
+            <!-- End of Main Content -->
+
+          {{>BackEnd/footer}}
+        </div>
+        <!-- End of Content Wrapper -->
+
+    </div>
+    <!-- End of Page Wrapper -->
+
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+        <i class="fas fa-angle-up"></i>
+    </a>
+
+    {{>BackEnd/footerLink}}
+    <script>
+        CKEDITOR.replace( 'about' );
+        CKEDITOR.replace( 'skills' );        
+    </script>
+</body>
+
+</html>

@@ -6,6 +6,8 @@ const webDetailController = require('./controllers/webDetailController');
 const loginController = require('./controllers/loginController');
 const testimonialController = require('./controllers/testimonialController');
 const galleryController = require('./controllers/galleryController');
+const blogController = require('./controllers/blogController');
+
 
 
 const app = express();
@@ -13,6 +15,7 @@ require("./db/conn");
 const port = process.env.PORT || 4000;
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+//app.use("/uploads", express.static(path.join(__dirname, "public/uploads")));
 
 
 
@@ -28,29 +31,34 @@ app.use(express.static('public'));
 
 const fetchData = async () => {
     try {
-      const webDetail = await webDetailController.getWebDetailsWithoutExpress();
+      const webDetail = await webDetailController.getWebDetailsAll();
       return webDetail;
     } catch (error) {
       console.error(error);
     }
   };
   
-  app.get("", async (req, res) => {
-    try {
-      let webDetail = await fetchData(); 
-      const testimonial_data = await testimonialController.gettestimonial();
-      res.render("FrontEnd/index", { title: "Home", webDetail,testimonial_data});
-    } catch (error) {
-      res.render("FrontEnd/404", { title: "Error Page",webDetail, message: "Internal Server Error"});    }
-  });
- app.get("/about", async (req,res) =>{
+app.get("", async (req, res) => {
+  try {
+    let webDetail = await fetchData(); 
+    const testimonial_data = await testimonialController.getTestimonial();
+    const categoryAll = await galleryController.getPujaCategory();
+    const galleryPujadata = await galleryController.getPujaGallery('6');
+
+    res.render("FrontEnd/index", { title: "Home", webDetail,testimonial_data,categoryAll,galleryPujadata});
+  } catch (error) {
+    res.render("FrontEnd/404", { title: "Error Page",webDetail, message: "Internal Server Error"});    }
+});
+
+app.get("/about", async (req,res) =>{
     try {
     let webDetail = await fetchData();
     res.render("FrontEnd/about", { title: "About", webDetail});
   } catch (error) {
     res.render("FrontEnd/404", { title: "Error Page",webDetail, message: "Internal Server Error"});  
   }
- });
+});
+
 app.get("/contact", async (req,res) =>{
     try {
         let webDetail = await fetchData(); 
@@ -91,6 +99,7 @@ app.get("/broadcast", async(req,res) =>{
           res.render("FrontEnd/404", { title: "Error Page",webDetail, message: "Internal Server Error"});  
         }
 });
+
 app.get("/faq", async(req,res) =>{
     try {
         let webDetail = await fetchData(); 
@@ -99,6 +108,7 @@ app.get("/faq", async(req,res) =>{
           res.render("FrontEnd/404", { title: "Error Page",webDetail, message: "Internal Server Error"});        
         }
 });
+
 app.get("/volunteers", async(req,res) =>{
     try {
         let webDetail = await fetchData(); 
@@ -107,6 +117,7 @@ app.get("/volunteers", async(req,res) =>{
           res.render("FrontEnd/404", { title: "Error Page",webDetail, message: "Internal Server Error"}); 
         }
 });
+
 app.get("/volunteer-detail",async (req,res) =>{
     try {
         let webDetail = await fetchData(); 
@@ -115,6 +126,7 @@ app.get("/volunteer-detail",async (req,res) =>{
           res.render("FrontEnd/404", { title: "Error Page",webDetail, message: "Internal Server Error"});   
        }
 });
+
 app.get("/pandit-details",async (req,res) =>{
   try {
       let webDetail = await fetchData(); 
@@ -123,6 +135,7 @@ app.get("/pandit-details",async (req,res) =>{
         res.render("FrontEnd/404", { title: "Error Page",webDetail, message: "Internal Server Error"});   
      }
 });
+
 app.get("/events", async(req,res) =>{
     try {
         let webDetail = await fetchData(); 
@@ -131,15 +144,18 @@ app.get("/events", async(req,res) =>{
         res.render("FrontEnd/404", { title: "Error Page",webDetail, message: "Internal Server Error"});  
         }
 });
+
 app.get("/puja",async (req,res) =>{
     try {
-        let webDetail = await fetchData(); const categoryPujaData = await galleryController.getPujaCategory();
+        let webDetail = await fetchData(); 
+        const categoryPujaData = await galleryController.getPujaCategory();
         const galleryPujadata = await galleryController.getPujaGallery();
         res.render("FrontEnd/puja", { title: "Puja", webDetail,categoryPujaData,galleryPujadata});
         } catch (error) {
         res.render("FrontEnd/404", { title: "Error Page",webDetail, message: "Internal Server Error"}); 
        }
 });
+
 app.get("/puja-details",async (req,res) =>{
     try {
         let webDetail = await fetchData(); 
@@ -149,6 +165,7 @@ app.get("/puja-details",async (req,res) =>{
         }
     res.render("FrontEnd/puja-details");
 });
+
 app.get("/holi",async (req,res) =>{
     try {
         let webDetail = await fetchData(); 
@@ -157,7 +174,9 @@ app.get("/holi",async (req,res) =>{
         res.render("FrontEnd/404", { title: "Error Page",webDetail, message: "Internal Server Error"});  
        }
 
-});app.get("/volunteer-detail",async (req,res) =>{
+});
+
+app.get("/volunteer-detail",async (req,res) =>{
 try {
     let webDetail = await fetchData(); 
     res.render("FrontEnd/volunteer-detail", { title: "Volunteer Detail", webDetail});
@@ -165,6 +184,7 @@ try {
     res.render("FrontEnd/404", { title: "Error Page",webDetail, message: "Internal Server Error"});   
    }
 });
+
 app.get("/holi-details",async (req,res) =>{
     try {
         let webDetail = await fetchData(); 
@@ -191,27 +211,28 @@ app.get("/dashboard", (req,res) =>{
 });
 
 app.get("/add-volunteers", (req,res) =>{
-    res.render("BackEnd/add-volunteers",{ title: "Add Volunteers"});
+    res.render("BackEnd/add_volunteers",{ title: "Add Volunteers"});
 });
 
-app.get("/web-details", (req,res) =>{
-    res.render("BackEnd/web-detail",{ title: "Web Details"});
+app.get("/web-details", async(req,res) =>{
+  let webDetail = await fetchData(); 
+    res.render("BackEnd/web_detail",{ title: "Web Details",webDetail});
 });
 
 app.get("/testimonial", async (req,res) =>{
-  const testimonial_data = await testimonialController.gettestimonial();
+  const testimonial_data = await testimonialController.getTestimonial();
   res.render("BackEnd/testimonials",{testimonial_data, title: "Testmonials"},);
 });
 
 
 app.get("/add-testimonial", async (req,res) =>{
-  const testimonial_data = await testimonialController.gettestimonial();
+  const testimonial_data = await testimonialController.getTestimonial();
   res.render("BackEnd/add_testimonials",{testimonial_data, title: "Add Testimonial"});
 });
 
 app.get('/testimonialedit', async (req, res) => {
   const testimonialId = req.query.id;
-  const testimonial_data = await testimonialController.gettestimonialId(testimonialId);
+  const testimonial_data = await testimonialController.getTestimonialId(testimonialId);
   try {
      res.render("BackEnd/add_testimonials",{testimonial_data, title: "Add Testimonial"});
   } catch (error) {
@@ -219,35 +240,90 @@ app.get('/testimonialedit', async (req, res) => {
 });
 
 app.post('/web-details', webDetailController.createWebDetail);
-app.get("/web-details-data", webDetailController.getWebDetails);
 app.post("/admin-login", loginController.login);
-app.post('/testimonial', testimonialController.Addtestimonial);
-app.get("/testimonial-list", testimonialController.gettestimonial);
-app.post('/category', galleryController.Addcategory);
+app.post('/testimonial', testimonialController.addTestimonial);
+app.get("/testimonial-list", testimonialController.getTestimonial);
+app.post('/category', galleryController.addCategory);
+//app.post('/add-image-gallery', galleryController.addImageGallery);
+// Attach middleware to the route
+app.post('/add-image-gallery', galleryController.upload.single('image'), galleryController.addImageGallery);
 
 app.get("/category", async (req,res) =>{
-  const category_data = await galleryController.getcategory();
+  const category_data = await galleryController.getCategory();
   res.render("BackEnd/category",{category_data, title: "Categoty"},);
 });
 
 app.get('/categoryedit', async (req, res) => {
   const categoryId = req.query.id;
-  const category_data = await galleryController.getcategoryId(categoryId);
+  const category_edit_data = await galleryController.getCategoryId(categoryId);
+  const category_data = await galleryController.getCategory();
   try {
-     res.render("BackEnd/category",{category_data, title: "Add category"});
+     res.render("BackEnd/category",{category_data,category_edit_data, title: "Add category"});
   } catch (error) {
     res.render("FrontEnd/404", { title: "Error Page",webDetail, message: "Internal Server Error"});  }
 });
 
 app.get("/add-image-gallery", async (req,res) =>{
-  const galleryData = await galleryController.getimagegallery();
-  res.render("BackEnd/add_image_gallery",{galleryData, title: "Add Gallery"});
+  const categoryAll = await galleryController.getCategory();
+  const galleryData = await galleryController.getImagegallery();
+  res.render("BackEnd/add_image_gallery",{galleryData,categoryAll, title: "Add Image Gallery"});
 });
 
 app.get("/image-gallery", async (req,res) =>{
-  const galleryData = await galleryController.getimagegallery();
-  res.render("BackEnd/image_gallery",{galleryData, title: "Gallery"});
+  const galleryData = await galleryController.getImagegallery();
+  res.render("BackEnd/image_gallery",{galleryData, title: "Image Gallery"});
 });
+
+app.get('/edit-image-gallery', async (req, res) => {
+  const imageGalleryId = req.query.id;
+  const imageGalleryData = await galleryController.getImageGalleryId(imageGalleryId);
+  const categoryAll = await galleryController.getCategory();
+
+  try {
+     res.render("BackEnd/add_image_gallery",{imageGalleryData,categoryAll, title: "Edit category"});
+  } catch (error) {
+    res.render("FrontEnd/404", { title: "Error Page",webDetail, message: "Internal Server Error"});  }
+});
+
+ app.post('/add-blog-category', blogController.addCBlogategory);
+
+app.get("/blog-category", async (req,res) =>{
+  const blogCategoryData = await blogController.getBlogategory();
+  res.render("BackEnd/blog_category",{blogCategoryData, title: "Blog Category"},);
+});
+
+app.get('/edit-blog-category', async (req, res) => {
+  const blogCategoryId = req.query.id;
+  const blogCategoryEditData = await blogController.getBlogCategoryId(blogCategoryId);
+  const blogCategoryData = await blogController.getBlogategory();
+  try {
+     res.render("BackEnd/blog_category",{blogCategoryData,blogCategoryEditData, title: "Edit Blog Category"});
+  } catch (error) {
+    res.render("FrontEnd/404", { title: "Error Page",webDetail, message: "Internal Server Error"});  }
+});
+
+// app.post('/add-blog', blogController.AddBlog);
+
+app.get("/add-blog", async (req,res) =>{
+  const blogCategory = await blogController.getBlogategory();
+  res.render("BackEnd/add_blog",{blogCategory, title: "Add Blog"});
+});
+
+app.get("/blog-list", async (req,res) =>{
+  const blogData = await blogController.getblogList();
+  res.render("BackEnd/blog_list",{blogData, title: "Blog List"});
+});
+
+// app.get('/edit-blog', async (req, res) => {
+//   const blogId = req.query.id;
+//   const blogData = await blogController.getBlogId(blogId);
+//   const blogCategory = await blogController.getBlogCategory();
+
+//   try {
+//      res.render("BackEnd/add_image_gallery",{blogData,blogCategory, title: "Edit Blog"});
+//   } catch (error) {
+//     res.render("FrontEnd/404", { title: "Error Page",webDetail, message: "Internal Server Error"});  }
+// });
 
 app.get("*", async(req,res) =>{
   let webDetail = await fetchData(); 

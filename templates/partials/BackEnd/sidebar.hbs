@@ -27,7 +27,7 @@
             </div>
 
             <!-- Nav Item - Pages Collapse Menu -->
-              <li class="nav-item">
+              <li class="nav-item active">
                 <a class="nav-link" href="add-volunteers">
                     <i class="fas fa-fw fa-table"></i>
                     <span>Volunteers</span></a>
@@ -44,16 +44,31 @@
             </li>
 
              <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
-                    aria-expanded="true" aria-controls="collapseUtilities">
+                {{!-- collapsed --}}
+                <a class="nav-link " href="#" data-toggle="collapse" data-target="#collapseGallery"
+                    aria-expanded="true" aria-controls="collapseGallery">
                     <i class="fas fa-fw fa-wrench"></i>
                     <span>Gallery</span>
                 </a>
-                <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
+                <div id="collapseGallery" class="collapse show" aria-labelledby="headingUtilities"
                     data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <a class="collapse-item" href="category">Category</a>
                         <a class="collapse-item" href="image-gallery">Image Gallery</a>
+                    </div>
+                </div>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseBlog"
+                    aria-expanded="true" aria-controls="collapseBlog">
+                    <i class="fas fa-fw fa-wrench"></i>
+                    <span>Blog</span>
+                </a>
+                <div id="collapseBlog" class="collapse" aria-labelledby="headingUtilities"
+                    data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item" href="blog-category">Category</a>
+                        <a class="collapse-item" href="blog-list">Blog</a>
                     </div>
                 </div>
             </li>
