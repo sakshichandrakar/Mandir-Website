@@ -7,14 +7,20 @@ const loginController = require('./controllers/loginController');
 const testimonialController = require('./controllers/testimonialController');
 const galleryController = require('./controllers/galleryController');
 const blogController = require('./controllers/blogController');
-
-
+const session = require('express-session');
+const authMiddleware = require('./middleware/authMiddleware'); 
 
 const app = express();
 require("./db/conn");
 const port = process.env.PORT || 4000;
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+
+app.use(session({
+  secret : 'webslesson',
+  resave : true,
+  saveUninitialized : true
+}));
 //app.use("/uploads", express.static(path.join(__dirname, "public/uploads")));
 
 
@@ -206,31 +212,31 @@ app.get("/forgot-password", (req,res) =>{
     res.render("BackEnd/forgot-password",{ title: "Forgot Password"});
 });
 
-app.get("/dashboard", (req,res) =>{
+app.get("/dashboard", authMiddleware.isAuthenticated,  (req,res) =>{
     res.render("BackEnd/dashboard",{ title: "Dashboard"});
 });
 
-app.get("/add-volunteers", (req,res) =>{
+app.get("/add-volunteers", authMiddleware.isAuthenticated, (req,res) =>{
     res.render("BackEnd/add_volunteers",{ title: "Add Volunteers"});
 });
 
-app.get("/web-details", async(req,res) =>{
+app.get("/web-details", authMiddleware.isAuthenticated, async(req,res) =>{
   let webDetail = await fetchData(); 
     res.render("BackEnd/web_detail",{ title: "Web Details",webDetail});
 });
 
-app.get("/testimonial", async (req,res) =>{
+app.get("/testimonial", authMiddleware.isAuthenticated, async (req,res) =>{
   const testimonial_data = await testimonialController.getTestimonial();
   res.render("BackEnd/testimonials",{testimonial_data, title: "Testmonials"},);
 });
 
 
-app.get("/add-testimonial", async (req,res) =>{
+app.get("/add-testimonial", authMiddleware.isAuthenticated, async (req,res) =>{
   const testimonial_data = await testimonialController.getTestimonial();
   res.render("BackEnd/add_testimonials",{testimonial_data, title: "Add Testimonial"});
 });
 
-app.get('/testimonialedit', async (req, res) => {
+app.get('/testimonialedit', authMiddleware.isAuthenticated, async (req, res) => {
   const testimonialId = req.query.id;
   const testimonial_data = await testimonialController.getTestimonialId(testimonialId);
   try {
@@ -239,22 +245,22 @@ app.get('/testimonialedit', async (req, res) => {
     res.render("FrontEnd/404", { title: "Error Page",webDetail, message: "Internal Server Error"});  }
 });
 
-app.post('/web-details', webDetailController.createWebDetail);
+app.post('/web-details', authMiddleware.isAuthenticated, webDetailController.createWebDetail);
 app.post("/admin-login", loginController.login);
-app.post('/testimonial', testimonialController.addTestimonial);
-app.get("/testimonial-list", testimonialController.getTestimonial);
-app.post('/category', galleryController.addCategory);
+app.post('/testimonial', authMiddleware.isAuthenticated, testimonialController.addTestimonial);
+app.get("/testimonial-list", authMiddleware.isAuthenticated, testimonialController.getTestimonial);
+app.post('/category', authMiddleware.isAuthenticated, galleryController.addCategory);
 //app.post('/add-image-gallery', galleryController.addImageGallery);
 // Attach middleware to the route
-app.post('/add-image-gallery', galleryController.upload.single('image'), galleryController.addImageGallery);
-app.post('/add-blog', blogController.addBlog);
+app.post('/add-image-gallery', authMiddleware.isAuthenticated, galleryController.upload.single('image'), galleryController.addImageGallery);
+app.post('/add-blog', authMiddleware.isAuthenticated, blogController.addBlog);
 
-app.get("/category", async (req,res) =>{
+app.get("/category", authMiddleware.isAuthenticated, async (req,res) =>{
   const category_data = await galleryController.getCategory();
   res.render("BackEnd/category",{category_data, title: "Categoty"},);
 });
 
-app.get('/categoryedit', async (req, res) => {
+app.get('/categoryedit', authMiddleware.isAuthenticated, async (req, res) => {
   const categoryId = req.query.id;
   const category_edit_data = await galleryController.getCategoryId(categoryId);
   const category_data = await galleryController.getCategory();
@@ -264,18 +270,18 @@ app.get('/categoryedit', async (req, res) => {
     res.render("FrontEnd/404", { title: "Error Page",webDetail, message: "Internal Server Error"});  }
 });
 
-app.get("/add-image-gallery", async (req,res) =>{
+app.get("/add-image-gallery", authMiddleware.isAuthenticated, async (req,res) =>{
   const categoryAll = await galleryController.getCategory();
   const galleryData = await galleryController.getImagegallery();
   res.render("BackEnd/add_image_gallery",{galleryData,categoryAll, title: "Add Image Gallery"});
 });
 
-app.get("/image-gallery", async (req,res) =>{
+app.get("/image-gallery", authMiddleware.isAuthenticated, async (req,res) =>{
   const galleryData = await galleryController.getImagegallery();
   res.render("BackEnd/image_gallery",{galleryData, title: "Image Gallery"});
 });
 
-app.get('/edit-image-gallery', async (req, res) => {
+app.get('/edit-image-gallery', authMiddleware.isAuthenticated, async (req, res) => {
   const imageGalleryId = req.query.id;
   const imageGalleryData = await galleryController.getImageGalleryId(imageGalleryId);
   const categoryAll = await galleryController.getCategory();
@@ -286,14 +292,14 @@ app.get('/edit-image-gallery', async (req, res) => {
     res.render("FrontEnd/404", { title: "Error Page",webDetail, message: "Internal Server Error"});  }
 });
 
- app.post('/add-blog-category', blogController.addCBlogategory);
+ app.post('/add-blog-category', authMiddleware.isAuthenticated, blogController.addCBlogategory);
 
-app.get("/blog-category", async (req,res) =>{
+app.get("/blog-category", authMiddleware.isAuthenticated, async (req,res) =>{
   const blogCategoryData = await blogController.getBlogategory();
   res.render("BackEnd/blog_category",{blogCategoryData, title: "Blog Category"},);
 });
 
-app.get('/edit-blog-category', async (req, res) => {
+app.get('/edit-blog-category', authMiddleware.isAuthenticated, async (req, res) => {
   const blogCategoryId = req.query.id;
   const blogCategoryEditData = await blogController.getBlogCategoryId(blogCategoryId);
   const blogCategoryData = await blogController.getBlogategory();
@@ -305,12 +311,12 @@ app.get('/edit-blog-category', async (req, res) => {
 
 // app.post('/add-blog', blogController.AddBlog);
 
-app.get("/add-blog", async (req,res) =>{
+app.get("/add-blog", authMiddleware.isAuthenticated, async (req,res) =>{
   const blogCategory = await blogController.getBlogategory();
   res.render("BackEnd/add_blog",{blogCategory, title: "Add Blog"});
 });
 
-app.get("/blog-list", async (req,res) =>{
+app.get("/blog-list", authMiddleware.isAuthenticated, async (req,res) =>{
   const blogData = await blogController.getBlogList();
   res.render("BackEnd/blog_list",{blogData, title: "Blog List"});
 });
@@ -325,6 +331,14 @@ app.get("/blog-list", async (req,res) =>{
 //   } catch (error) {
 //     res.render("FrontEnd/404", { title: "Error Page",webDetail, message: "Internal Server Error"});  }
 // });
+
+app.get('/logout', function(req, res){
+
+  req.session.destroy();
+
+  res.redirect("/admin-login");
+
+});
 
 app.get("*", async(req,res) =>{
   let webDetail = await fetchData(); 

@@ -46,8 +46,6 @@ const addBlog = async (req, res) => {
     const {category_id,title,dateOfBlog,description,editId} = req.body;
     const Test = {category_id,title,dateOfBlog,description,editId };
     const result = await blog.addNewBlog(Test);
-    console.log(result);
-    
     res.redirect('/blog-list');
   } catch (error) {
     console.error(error);
