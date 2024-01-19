@@ -47,10 +47,10 @@
                                     <tbody>
                                         {{#each blogData as |data|}}
                                         <tr>
-                                            <td>{{data.category_id}}</td>
+                                            <td>{{data.category_name}}</td>
                                             <td>{{data.title}}</td>
-                                            <td>{{data.dateOfBlog}}</td>
-                                            <td>{{data.description}}</td>
+                                            <td>{{data.dateOfBlog}}</td>                                                 
+                                            <td>{{{data.description}}}</td>
                                             <td>
                                                 <span class="d-flex"><a href="add-blog" class="btn btn-danger btn-circle btn-sm m-0">
                                                   <i class="fas fa-trash"></i>

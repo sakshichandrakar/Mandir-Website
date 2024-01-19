@@ -462,38 +462,33 @@
       </div>
 
       <div class="row">
+        {{#each blogData as |data|}}
+          <!-- Article Start -->
+          <div class="col-lg-4 col-md-6">
+            <article class="sigma_post">
+              <div class="sigma_post-thumb">
+                <a href="blog-details">
+                  <img src="assets/img/blog/2.jpg" alt="post">
+                </a>
+              </div>
+              <div class="sigma_post-body">
+                <div class="sigma_post-meta">
+                  <div class="me-3">
+                    <i class="fas fa-om"></i>
+                    <a href="blog-details" class="sigma_post-category">{{data.category_name}}</a>,
+                  </div>
+                  <a href="blog-details" class="sigma_post-date"> <i class="far fa-calendar"></i> {{data.dateOfBlog}}</a>
+                </div>
+                <h5> <a href="blog-details">{{data.title}}</a> </h5>
+              </div>
+            </article>
+          </div>
+          <!-- Article End -->
+        {{/each}}
+
 
         <!-- Article Start -->
-        <div class="col-lg-4 col-md-6">
-          <article class="sigma_post">
-            <div class="sigma_post-thumb">
-              <a href="blog-details">
-                <img src="assets/img/blog/2.jpg" alt="post">
-              </a>
-            </div>
-            <div class="sigma_post-body">
-              <div class="sigma_post-meta">
-                <div class="me-3">
-                  <i class="fas fa-om"></i>
-                  <a href="blog-details" class="sigma_post-category">Temple</a>,
-                  <a href="blog-details" class="sigma_post-category">Love</a>
-                </div>
-                <a href="blog-details" class="sigma_post-date"> <i class="far fa-calendar"></i> May 20, 2022</a>
-              </div>
-              <h5> <a href="blog-details">Education for all rural children are necessary.</a> </h5>
-              <div class="sigma_post-single-author">
-                <img src="assets/img/people/1.jpg" alt="author">
-                <div class="sigma_post-single-author-content">
-                  By <p>Yesh Chopra</p>
-                </div>
-              </div>
-            </div>
-          </article>
-        </div>
-        <!-- Article End -->
-
-        <!-- Article Start -->
-        <div class="col-lg-4 col-md-6">
+        {{!-- <div class="col-lg-4 col-md-6">
           <article class="sigma_post">
             <div class="sigma_post-thumb">
               <a href="blog-details">
@@ -518,11 +513,11 @@
               </div>
             </div>
           </article>
-        </div>
+        </div> --}}
         <!-- Article End -->
 
         <!-- Article Start -->
-        <div class="col-lg-4 col-md-6">
+        {{!-- <div class="col-lg-4 col-md-6">
           <article class="sigma_post">
             <div class="sigma_post-thumb">
               <a href="blog-details">
@@ -547,7 +542,7 @@
               </div>
             </div>
           </article>
-        </div>
+        </div> --}}
         <!-- Article End -->
 
       </div>
