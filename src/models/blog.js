@@ -183,7 +183,7 @@ class blog {
     if (limit !== "") {
       limitClause = "ORDER BY blogs.id DESC LIMIT " + limit;
     }
-    const blogs_list = `SELECT blogs.title,DATE_FORMAT(blogs.dateOfBlog, "%M %d, %Y") as dateOfBlog, blogs.description,blog_category.category_name from blogs INNER JOIN blog_category on blog_category.id = blogs.category_id ${limitClause}`;
+    const blogs_list = `SELECT blogs.image,blogs.title,DATE_FORMAT(blogs.dateOfBlog, "%M %d, %Y") as dateOfBlog, blogs.description,blog_category.category_name from blogs INNER JOIN blog_category on blog_category.id = blogs.category_id ${limitClause}`;
     return new Promise((resolve, reject) => {
       connection.query(blogs_list, (error, results) => {
         if (error) {

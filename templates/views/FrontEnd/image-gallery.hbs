@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="zxx" dir="ltr">
+<head>
+{{>FrontEnd/headerLink}}
+</head>
+
+<body>
+{{>FrontEnd/navbar}}
+
+  <!-- partial-->
+  <div class="sigma_subheader dark-overlay dark-overlay-2" style="background-image: url(assets/img/subheader.jpg)">
+
+    <div class="container">
+      <div class="sigma_subheader-inner">
+        <div class="sigma_subheader-text">
+          <h1>Image Gallery</h1>
+        </div>
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a class="btn-link" href="/">Home</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Image Gallery</li>
+          </ol>
+        </nav>
+      </div>
+    </div>
+
+  </div>
+  <!-- partial -->
+
+  <!-- Categories Start -->
+  <div class="section section-padding">
+    <div class="container">
+
+      <div class="text-center filter-items">
+        <h5 class="active portfolio-trigger" data-filter="*">All</h5>
+        {{#each categoryPujaData as |data|}}
+        <h5 class="portfolio-trigger" data-filter=".{{data.id}}">{{data.category_name}}</h5>
+        {{/each}}
+      </div>
+
+      <div class="portfolio-filter row">
+        {{#each galleryPujadata as |data|}}
+        <div class="col-lg-4 {{data.category_id}}">
+          <div class="sigma_portfolio-item">
+            <img src="uploads/{{data.image}}" alt="portfolio">
+            <div class="sigma_portfolio-item-content">
+              <div class="sigma_portfolio-item-content-inner">
+                <h5> <a href="puja-details"> {{data.title}} </a> </h5>
+                <p>{{data.description}}</p>
+              </div>
+              <a href="puja-details"><i class="fal fa-plus"></i></a>
+            </div>
+          </div>
+        </div>
+        {{/each}}
+      </div>
+
+    </div>
+  </div>
+  <!-- Categories End -->
+
+  <!-- Blog Start -->
+  <div class="section section-padding">
+    <div class="container">
+
+      <div class="section-title text-center">
+        <p class="subtitle">Blog</p>
+        <h4 class="title">News Feed</h4>
+      </div>
+
+      <div class="row">
+
+        {{#each blogData as |data|}}
+          <!-- Article Start -->
+          <div class="col-lg-4 col-md-6">
+            <article class="sigma_post">
+              <div class="sigma_post-thumb">
+                <a href="blog-details">
+                  <img src="uploads/blog/{{data.image}}" alt="post">
+                </a>
+              </div>
+              <div class="sigma_post-body">
+                <div class="sigma_post-meta">
+                  <div class="me-3">
+                    <i class="fas fa-om"></i>
+                    <a href="blog-details" class="sigma_post-category">{{data.category_name}}</a>,
+                  </div>
+                  <a href="blog-details" class="sigma_post-date"> <i class="far fa-calendar"></i> {{data.dateOfBlog}}</a>
+                </div>
+                <h5> <a href="blog-details">{{data.title}}</a> </h5>
+              </div>
+            </article>
+          </div>
+          <!-- Article End -->
+        {{/each}}
+
+      </div>
+
+    </div>
+  </div>
+  <!-- Blog End -->
+
+  {{>FrontEnd/footer}}
+  {{>FrontEnd/footerLink}}
+</body>
+</html>

@@ -3,40 +3,11 @@
     <img src="assets/img/om.png" alt="preloader">
   </div>
   <!-- Preloader End -->
-<!-- partial-->
-  <aside class="sigma_aside sigma_aside-left">
-
-    <a class="navbar-brand" href="/"> <img src="assets/img/logo1.png" alt="logo"> </a>
-
-    <!-- Menu -->
-    <ul>
-          <li class="menu-item">
-            <a href="/">Home</a>
-          </li>
-          <li class="menu-item ">
-            <a href="#">Blog</a>
-          </li>
-          <li class="menu-item"> <a href="faq">FAQ</a> </li>
-          <li class="menu-item menu-item-has-children"> 
-                <a href="#">Volunteers</a>
-          </li>
-          <li class="menu-item menu-item-has-children">
-            <a href="#">Gallery</a>
-            <ul class="sub-menu">
-             <li class="menu-item"> <a href="puja">Image Gallery</a> </li>
-             <li class="menu-item"> <a href="broadcast">Video Gallery</a> </li>
-           </ul>
-         </li>
-          <li class="menu-item">
-            <a href="contact">Contact</a>
-          </li>
-    </ul>
-
-  </aside>
-  <div class="sigma_aside-overlay aside-trigger-left"></div>
+  <!-- partial:partia/__mobile-nav.html -->
+    {{> FrontEnd/mobile}}
   <!-- partial -->
 
-  <!-- partial -->
+  <!-- partial:partia/__header.html -->
   <header class="sigma_header header-3 can-sticky header-absolute">
 
     <!-- Middle Header Start -->
@@ -56,38 +27,49 @@
           <div class="sigma_header-top">
             <div class="sigma_header-top-inner">
               <ul class="sigma_header-top-links">
-                <li class="menu-item"> <a href="tel:+123456789"> <i class="fal fa-phone"></i> {{webDetail.[0].mobile_no}}</a> </li>
-                <li class="menu-item"> <a href="mailto:info@example.com"> <i class="fal fa-envelope"></i> {{webDetail.[0].email}}</a> </li>
+                <li class="menu-item"> <a href="tel:+{{webDetail.[0].mobile_no}}"> <i class="fal fa-phone"></i>{{webDetail.[0].mobile_no}}</a> </li>
+                <li class="menu-item"> <a href="mailto:{{webDetail.[0].email}}"> <i class="fal fa-envelope"></i> {{webDetail.[0].email}}</a> </li>
               </ul>
             </div>
           </div>
           <div class="d-flex justify-content-center justify-content-lg-between">
             <ul class="navbar-nav">
-              <li class="menu-item">
-                <a href="/">Home</a>
-              </li>
-              <li class="menu-item"> <a href="about">About</a> </li>
-              <li class="menu-item">
-                <a href="blog">Blog</a>
-              </li>
-               <li class="menu-item"> <a href="faq">FAQ</a> </li>
-                <li class="menu-item"> <a href="volunteers">Volunteers</a> </li>
-              <li class="menu-item ">
-                <a href="service">Service</a>
-              </li>
-               <li class="menu-item menu-item-has-children">
+              <li class="menu-item"><a href="/">Home</a></li>
+              <li class="menu-item"><a href="about-us">About</a> </li>
+              <li class="menu-item"><a href="blog">Blog</a></li>
+              <li class="menu-item"> <a href="faq">FAQ</a> </li>
+              <li class="menu-item "><a href="service">Service</a></li>
+              <li class="menu-item menu-item-has-children">
                   <a href="#">Gallery</a>
                   <ul class="sub-menu">
-                  <li class="menu-item"> <a href="puja">Image Gallery</a> </li>
-                  <li class="menu-item"> <a href="broadcast">Video Gallery</a> </li>
-                </ul>
+                    <li class="menu-item"> <a href="image">Image Gallery</a> </li>
+                    <li class="menu-item"> <a href="broadcast">Video Gallery</a> <li>
+                  </ul>
               </li>
-              <li class="menu-item">
-                <a href="contact">Contact</a>
-              </li>
+              <li class="menu-item"><a href="contact">Contact</a></li>
             </ul>
           </div>
         </div>
+
+        <!-- Controls -->
+        <div class="sigma_header-controls style-2">
+          <ul class="sigma_header-controls-inner">
+            <!-- Mobile Toggler -->
+            <li class="aside-toggler style-2 aside-trigger-left">
+              <span></span>
+              <span></span>
+              <span></span>
+              <span></span>
+              <span></span>
+              <span></span>
+              <span></span>
+              <span></span>
+              <span></span>
+            </li>
+          </ul>
+
+        </div>
+
       </nav>
     </div>
     <!-- Middle Header End -->
