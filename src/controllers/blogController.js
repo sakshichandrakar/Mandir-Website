@@ -31,13 +31,13 @@ const getBlogCategoryId = async (blogCategoryId) => {
   }
 };
 
-const getBlogList = async (req, res) => {
+const getBlogList = async (limit="") => {
   try {
-    const blogListData = await blog.getBlogList();
+    const blogListData = await blog.getBlogList(limit);
     return blogListData;
   } catch (error) {
     console.error(error);
-    res.status(500).json({ error: 'Internal Server Error' });
+    //res.status(500).json({ error: 'Internal Server Error' });
   }
 };
 

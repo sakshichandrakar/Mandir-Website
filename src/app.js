@@ -50,8 +50,9 @@ app.get("", async (req, res) => {
     const testimonial_data = await testimonialController.getTestimonial();
     const categoryAll = await galleryController.getPujaCategory();
     const galleryPujadata = await galleryController.getPujaGallery('6');
+    const blogData = await blogController.getBlogList(3);
 
-    res.render("FrontEnd/index", { title: "Home", webDetail,testimonial_data,categoryAll,galleryPujadata});
+    res.render("FrontEnd/index", { title: "Home", webDetail,testimonial_data,categoryAll,galleryPujadata, blogData});
   } catch (error) {
     res.render("FrontEnd/404", { title: "Error Page",webDetail, message: "Internal Server Error"});    }
 });
