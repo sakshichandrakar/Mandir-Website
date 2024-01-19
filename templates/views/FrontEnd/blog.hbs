@@ -150,193 +150,34 @@
 
         <div class="col-lg-12">
           <div class="row">
-
-            <!-- Article Start -->
-            <div class="col-md-6">
-              <article class="sigma_post">
-                <div class="sigma_post-thumb">
-                  <a href="blog-details">
-                    <img src="assets/img/blog/1.jpg" alt="post">
-                  </a>
-                </div>
-                <div class="sigma_post-body">
-                  <div class="sigma_post-meta">
-                    <div class="me-3">
-                      <i class="fas fa-om"></i>
-                      <a href="blog-details" class="sigma_post-category">Temple</a>
-                    </div>
-                    <a href="blog-details" class="sigma_post-date"> <i class="far fa-calendar"></i> May 20, 2022</a>
+           {{#each blogData as |data|}}
+              <!-- Article Start -->
+              <div class="col-md-6">
+                <article class="sigma_post">
+                  <div class="sigma_post-thumb">
+                    <a href="blog-details">
+                      <img src="uploads/blog/{{data.image}}" alt="post">
+                    </a>
                   </div>
-                  <h5> <a href="blog-details">Mahashivratri Temple</a> </h5>
-                </div>
-              </article>
-            </div>
-            <!-- Article End -->
-
-            <!-- Article Start -->
-            <div class="col-md-6">
-              <article class="sigma_post">
-                <div class="sigma_post-thumb">
-                  <a href="blog-details">
-                    <img src="assets/img/blog/2.jpg" alt="post">
-                  </a>
-                </div>
-                <div class="sigma_post-body">
-                  <div class="sigma_post-meta">
-                    <div class="me-3">
-                      <i class="fas fa-om"></i>
-                      <a href="blog-details" class="sigma_post-category">Temple</a>,
-                      <a href="blog-details" class="sigma_post-category">Love</a>
+                  <div class="sigma_post-body">
+                    <div class="sigma_post-meta">
+                      <div class="me-3">
+                        <i class="fas fa-om"></i>
+                        <a href="blog-details" class="sigma_post-category">{{data.category_name}}</a>
+                      </div>
+                      <a href="blog-details" class="sigma_post-date"> <i class="far fa-calendar"></i> {{data.dateOfBlog}}</a>
                     </div>
-                    <a href="blog-details" class="sigma_post-date"> <i class="far fa-calendar"></i> May 20, 2022</a>
+                    <h5> <a href="blog-details">{{data.title}}</a> </h5>
                   </div>
-                  <h5> <a href="blog-details">Varanasi At Night</a> </h5>
-                </div>
-              </article>
-            </div>
-            <!-- Article End -->
+                </article>
+              </div>
+              <!-- Article End -->
+           {{/each}}
 
-            <!-- Article Start -->
-            <div class="col-md-6">
-              <article class="sigma_post">
-                <div class="sigma_post-thumb">
-                  <a href="blog-details">
-                    <img src="assets/img/blog/3.jpg" alt="post">
-                  </a>
-                </div>
-                <div class="sigma_post-body">
-                  <div class="sigma_post-meta">
-                    <div class="me-3">
-                      <i class="fas fa-om"></i>
-                      <a href="blog-details" class="sigma_post-category">Temple</a>,
-                      <a href="blog-details" class="sigma_post-category">Love</a>
-                    </div>
-                    <a href="blog-details" class="sigma_post-date"> <i class="far fa-calendar"></i> May 20, 2022</a>
-                  </div>
-                  <h5> <a href="blog-details">OM Mahashivratri</a> </h5>
-                </div>
-              </article>
-            </div>
-            <!-- Article End -->
-
-            <!-- Article Start -->
-            <div class="col-md-6">
-              <article class="sigma_post">
-                <div class="sigma_post-thumb">
-                  <a href="blog-details">
-                    <img src="assets/img/blog/4.jpg" alt="post">
-                  </a>
-                </div>
-                <div class="sigma_post-body">
-                  <div class="sigma_post-meta">
-                    <div class="me-3">
-                      <i class="fas fa-om"></i>
-                      <a href="blog-details" class="sigma_post-category">Temple</a>,
-                      <a href="blog-details" class="sigma_post-category">Love</a>
-                    </div>
-                    <a href="blog-details" class="sigma_post-date"> <i class="far fa-calendar"></i> May 20, 2022</a>
-                  </div>
-                  <h5> <a href="blog-details">Chaar Dhaam Yatra</a> </h5>
-                </div>
-              </article>
-            </div>
-            <!-- Article End -->
-
-            <!-- Article Start -->
-            <div class="col-md-6">
-              <article class="sigma_post">
-                <div class="sigma_post-thumb">
-                  <a href="blog-details">
-                    <img src="assets/img/blog/5.jpg" alt="post">
-                  </a>
-                </div>
-                <div class="sigma_post-body">
-                  <div class="sigma_post-meta">
-                    <div class="me-3">
-                      <i class="fas fa-om"></i>
-                      <a href="blog-details" class="sigma_post-category">Temple</a>,
-                      <a href="blog-details" class="sigma_post-category">Love</a>
-                    </div>
-                    <a href="blog-details" class="sigma_post-date"> <i class="far fa-calendar"></i> May 20, 2022</a>
-                  </div>
-                  <h5> <a href="blog-details">Mahashivratri</a> </h5>
-                </div>
-              </article>
-            </div>
-            <!-- Article End -->
-
-            <!-- Article Start -->
-            <div class="col-md-6">
-              <article class="sigma_post">
-                <div class="sigma_post-thumb">
-                  <a href="blog-details">
-                    <img src="assets/img/blog/6.html" alt="post">
-                  </a>
-                </div>
-                <div class="sigma_post-body">
-                  <div class="sigma_post-meta">
-                    <div class="me-3">
-                      <i class="fas fa-om"></i>
-                      <a href="blog-details" class="sigma_post-category">Temple</a>,
-                      <a href="blog-details" class="sigma_post-category">Love</a>
-                    </div>
-                    <a href="blog-details" class="sigma_post-date"> <i class="far fa-calendar"></i> May 20, 2022</a>
-                  </div>
-                  <h5> <a href="blog-details">Jagannath Yatra</a> </h5>
-                </div>
-              </article>
-            </div>
-            <!-- Article End -->
-
-            <!-- Article Start -->
-            <div class="col-md-6">
-              <article class="sigma_post">
-                <div class="sigma_post-thumb">
-                  <a href="blog-details">
-                    <img src="assets/img/blog/7.jpg" alt="post">
-                  </a>
-                </div>
-                <div class="sigma_post-body">
-                  <div class="sigma_post-meta">
-                    <div class="me-3">
-                      <i class="fas fa-om"></i>
-                      <a href="blog-details" class="sigma_post-category">Temple</a>,
-                      <a href="blog-details" class="sigma_post-category">Love</a>
-                    </div>
-                    <a href="blog-details" class="sigma_post-date"> <i class="far fa-calendar"></i> May 20, 2022</a>
-                  </div>
-                  <h5> <a href="blog-details">Ramleela</a> </h5>
-                </div>
-              </article>
-            </div>
-            <!-- Article End -->
-
-            <!-- Article Start -->
-            <div class="col-md-6">
-              <article class="sigma_post">
-                <div class="sigma_post-thumb">
-                  <a href="blog-details">
-                    <img src="assets/img/blog/8.jpg" alt="post">
-                  </a>
-                </div>
-                <div class="sigma_post-body">
-                  <div class="sigma_post-meta">
-                    <div class="me-3">
-                      <i class="fas fa-om"></i>
-                      <a href="blog-details" class="sigma_post-category">Temple</a>,
-                      <a href="blog-details" class="sigma_post-category">Love</a>
-                    </div>
-                    <a href="blog-details" class="sigma_post-date"> <i class="far fa-calendar"></i> May 20, 2022</a>
-                  </div>
-                  <h5> <a href="blog-details">Kumbh Mela</a> </h5>
-                </div>
-              </article>
-            </div>
-            <!-- Article End -->
 
           </div>
           <!-- Pagination Start -->
-          <ul class="pagination mb-0">
+          {{!-- <ul class="pagination mb-0">
             <li class="page-item"><a class="page-link" href="#"> <i class="far fa-chevron-left"></i> </a></li>
             <li class="page-item"><a class="page-link" href="#">1</a></li>
             <li class="page-item active">
@@ -344,7 +185,7 @@
             </li>
             <li class="page-item"><a class="page-link" href="#">3</a></li>
             <li class="page-item"><a class="page-link" href="#"> <i class="far fa-chevron-right"></i> </a></li>
-          </ul>
+          </ul> --}}
           <!-- Pagination End -->
 
         </div>

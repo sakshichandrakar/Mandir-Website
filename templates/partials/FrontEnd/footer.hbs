@@ -24,12 +24,13 @@
           <div class="col-xl-2 col-lg-2 col-md-4 col-sm-12 footer-widget">
             <h5 class="widget-title">Information</h5>
             <ul>
-              <li> <a href="puja">Puja</a> </li>
-              <li> <a href="service">Services</a> </li>
-              <li> <a href="about">Temple</a> </li>
-              <li> <a href="holi">Holis</a> </li>
-              <li> <a href="volunteers">Volunteers</a> </li>
-              <li> <a href="events">Donation</a> </li>
+              <li> <a href="about-us">About</a> </li>
+              <li> <a href="blog">Blog</a> </li>
+              <li> <a href="faq">FAQ</a> </li>
+              <li> <a href="service">Service</a> </li>
+              <li> <a href="image">Image Gallery</a> </li>
+              <li> <a href="video">Video Gallery</a> </li>
+              <li> <a href="contact">Contact</a> </li>
             </ul>
           </div>
           <div class="col-xl-2 col-lg-2 col-md-4 col-sm-12 footer-widget">
@@ -44,14 +45,17 @@
           </div>
           <div class="col-xl-4 col-lg-4 col-md-3 col-sm-12 d-none d-lg-block footer-widget widget-recent-posts">
             <h5 class="widget-title">Recent Posts</h5>
-            <article class="sigma_recent-post">
-              <a href="blog-details"><img src="assets/img/blog/sm/1.jpg" alt="post"></a>
-              <div class="sigma_recent-post-body">
-                <a href="blog-details"> <i class="far fa-calendar"></i> May 20, 2022</a>
-                <h6> <a href="blog-details">As we've all discovered by now, the world can change</a> </h6>
-              </div>
-            </article>
-            <article class="sigma_recent-post">
+              {{#each blogData as |data|}}
+                <article class="sigma_recent-post">
+                  <a href="blog-details"><img src="uploads/blog/{{data.image}}" alt="post"></a>
+                  <div class="sigma_recent-post-body">
+                    <a href="blog-details"> <i class="far fa-calendar"></i> {{data.dateOfBlog}}</a>
+                    <h6> <a href="blog-details">{{data.title}}</a> </h6>
+                  </div>
+                </article>
+              {{/each}}
+
+            {{!-- <article class="sigma_recent-post">
               <a href="blog-details"><img src="assets/img/blog/sm/2.jpg" alt="post"></a>
               <div class="sigma_recent-post-body">
                 <a href="blog-details"> <i class="far fa-calendar"></i> May 20, 2022</a>
@@ -64,14 +68,14 @@
                 <a href="blog-details"> <i class="far fa-calendar"></i> May 20, 2022</a>
                 <h6> <a href="blog-details">As we've all discovered by now, the world can change</a> </h6>
               </div>
-            </article>
+            </article> --}}
           </div>
         </div>
       </div>
     </div>
 
     <!-- Footer Bottom -->
-    <div class="sigma_footer-bottom">
+    {{!-- <div class="sigma_footer-bottom">
       <div class="container-fluid">
         <div class="sigma_footer-copyright">
           <p> Copyright © Maharatri - <a href="#" class="text-white">2022</a> </p>
@@ -102,7 +106,7 @@
           </li>
         </ul>
       </div>
-    </div>
+    </div> --}}
 
   </footer>
   <!-- partial -->
