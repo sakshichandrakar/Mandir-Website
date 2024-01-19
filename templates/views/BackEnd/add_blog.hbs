@@ -28,7 +28,7 @@
                     <div class="card shadow mb-4">
                         <div class="card-body">
                             <h1 class="h3 mb-2 text-gray-800">
-                                {{#if imageGalleryData.id}}
+                                {{#if blogData.id}}
                                 Edit Blog
                                 {{else}}
                                 Add Blog
@@ -38,7 +38,7 @@
                                     </a></span>
                             </h1>
                             <form class="user" action="/add-blog" method="POST">
-                                <input type="hidden" name="editId" value="{{imageGalleryData.id}}">
+                                <input type="hidden" name="editId" value="{{blogData.id}}">
                                 <div class="row">
                                     <div class="col-lg-6">
                                         <div class="form-group">
@@ -56,20 +56,20 @@
                                             <label class="form-label">Title</label>
                                             <input type="text" class="form-control"
                                                 placeholder="Enter Title..." name="title"
-                                                value="{{imageGalleryData.title}}">
+                                                value="{{blogData.title}}">
                                         </div>
                                     </div>
                                     <div class="col-lg-6">
                                         <div class="form-group">
                                             <label class="form-label">Date</label>
                                             <input type="date" class="form-control"
-                                                 name="date"
-                                                value="{{imageGalleryData.title}}">
+                                                 name="dateOfBlog"
+                                                value="{{blogData.dateOfBlog}}">
                                         </div>
                                     </div>
                                     <div class="col-lg-12">
                                         <div class="form-group">
-                                            <label class="form-label">Title</label>
+                                            <label class="form-label">Description</label>
                                             <textarea class="form-control form-control-user" placeholder="Enter Description..." name="description" id="description"></textarea>
 
                                         </div>
@@ -112,7 +112,7 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
     $(document).ready(function () {
-        var selectedValue = "{{ imageGalleryData.category_id }}";
+        var selectedValue = "{{ blogData.category_id }}";
         $('#category_id').val(selectedValue);
         $('#category_id').on('change', function () {
             var newSelectedValue = $(this).val();            

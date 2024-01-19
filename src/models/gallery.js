@@ -98,7 +98,6 @@ class gallery {
     }
   
     const pujaimages = `SELECT image_gallery.id as id,image_gallery.title,image_gallery.description,image_gallery.image,image_gallery.category_id,category.category_name from image_gallery INNER JOIN category on category.id = image_gallery.category_id ${limitClause}`;
-    console.log(pujaimages);
     return new Promise((resolve, reject) => {
       connection.query(pujaimages, (error, results) => {
         if (error) {
