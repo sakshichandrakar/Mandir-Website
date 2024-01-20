@@ -66,7 +66,7 @@ const getPujaGallery = async (limit ='') => {
 // Set up multer for handling file uploads
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-      cb(null, 'public/uploads/'); // Set the destination folder for uploaded files
+      cb(null, 'public/uploads/gallery'); // Set the destination folder for uploaded files
   },
   filename: function (req, file, cb) {
       cb(null, Date.now() + path.extname(file.originalname)); // Set the filename with a timestamp
