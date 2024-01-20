@@ -60,90 +60,17 @@ class blog {
     });
   }
 
-  static getImageGalleryAll() {
-    const selectAllQuery = 'SELECT image_gallery.id, image_gallery.title,image_gallery.image, image_gallery.description, category.id AS category_id, category.category_name FROM image_gallery LEFT JOIN category ON image_gallery.category_id = category.id;';
-    return new Promise((resolve, reject) => {
-      connection.query(selectAllQuery, (error, results) => {
-        if (error) {
-          reject(error);
-        } else {
-          resolve(results);
-        }
-      });
-    });
-  }
-
-  static getPujaCategoryAll() {
-    const PujaAllCategory = `SELECT category.id, category.category_name
-    FROM category
-    INNER JOIN image_gallery ON category.id = image_gallery.category_id
-    WHERE category.is_active = 0 AND category.is_deleted = 0
-    GROUP BY category.id`;
-    return new Promise((resolve, reject) => {
-      connection.query(PujaAllCategory, (error, results) => {
-        if (error) {
-          reject(error);
-        } else {
-          resolve(results);
-        }
-      });
-    });
-
-  }
-
-  static getPujaGalleryAll() {
-    const pujaimages = `SELECT * from image_gallery`;
-    return new Promise((resolve, reject) => {
-      connection.query(pujaimages, (error, results) => {
-        if (error) {
-          reject(error);
-        } else {
-          resolve(results);
-        }
-      });
-    });
-  }
-
-  static addImageGallery(detail) {
-    const { title, description, image, category_id, editId } = detail;
-    if (editId > 0) {
-      // If editId is provided, update the existing category
-      return new Promise((resolve, reject) => {
-        const updateQuery = 'UPDATE image_gallery SET title= ?,description=?,image=?,category_id=? WHERE id = ?';
-        connection.query(updateQuery, [title, description, image, category_id, editId], (updateError) => {
-          if (updateError) {
-            reject(updateError);
-          } else {
-            resolve({ updated: true, id: editId });
-          }
-        });
-      });
-    } else {
-      // If editId is not provided, insert a new category
-      return new Promise((resolve, reject) => {
-        const insertQuery = 'INSERT INTO image_gallery(title,description,image,category_id) VALUES (?,?,?,?)';
-        connection.query(insertQuery, [title, description, image, category_id], (insertError, insertResults) => {
-          if (insertError) {
-            reject(insertError);
-          } else {
-            resolve({ inserted: true, id: insertResults.insertId });
-          }
-        });
-      });
-    }
-  }
-
   static findByBlogId(id) {
-    const selectByIdQuery = 'SELECT * FROM blogs WHERE id = ?';
+    const selectByIdQuery = 'SELECT blogs.id, blogs.image,blogs.title,DATE_FORMAT(blogs.dateOfBlog, "%Y-%m-%d") as dateOfBlog, blogs.description,blogs.category_id FROM blogs WHERE id = ?';
     return new Promise((resolve, reject) => {
       connection.query(selectByIdQuery, [id], (error, results) => {
         if (error) {
           reject(error);
         } else {
           if (results.length === 0) {
-            resolve(null); // If no category found with the given ID
+            resolve(null); 
           } else {
-            resolve(results[0]); // Assuming ID is unique, return the first result
+            resolve(results[0]); 
           }
         }
       });
@@ -151,24 +78,43 @@ class blog {
   }
 
   static addNewBlog(detail) {
-    const { category_id,title,dateOfBlog,description,editId  } = detail;
+    const { category_id,title,dateOfBlog,description,image,editId } = detail;
     if (editId > 0) {
-      // If editId is provided, update the existing category
       return new Promise((resolve, reject) => {
-        const updateQuery = 'UPDATE image_gallery SET title= ?,description=?,image=?,category_id=? WHERE id = ?';
-        connection.query(updateQuery, [category_id,title,dateOfBlog,description,editId ], (updateError) => {
-          if (updateError) {
-            reject(updateError);
-          } else {
-            resolve({ updated: true, id: editId });
-          }
-        });
+      let updateQuery, updateParams;
+  
+      if (image === "") {
+        updateQuery = 'UPDATE blogs SET category_id=?, title=?, dateOfBlog=?,description=? WHERE id=?';
+        updateParams = [category_id, title,dateOfBlog, description, editId];
+      } else {
+        updateQuery = 'UPDATE blogs SET category_id=?, title=?, dateOfBlog=?,description=?,image=? WHERE id=?';
+        updateParams = [category_id, title,dateOfBlog, description,image, editId];
+      }
+      connection.query(updateQuery, updateParams, (updateError) => {
+        if (updateError) {
+          reject(updateError);
+        } else {
+          resolve({ updated: true, id: editId });
+        }
       });
+    });
+
+      // If editId is provided, update the existing category
+      // return new Promise((resolve, reject) => {
+      //   const updateQuery = 'UPDATE blogs SET category_id=? , title= ?,dateOfBlog=?, description=? WHERE id = ?';
+      //   connection.query(updateQuery, [category_id,title,dateOfBlog,description,editId ], (updateError) => {
+      //     if (updateError) {
+      //       reject(updateError);
+      //     } else {
+      //       resolve({ updated: true, id: editId });
+      //     }
+      //   });
+      // });
     } else {
       // If editId is not provided, insert a new category
       return new Promise((resolve, reject) => {
-        const insertQuery = 'INSERT INTO blogs(category_id,title,dateOfBlog,description ) VALUES (?,?,?,?)';
-        connection.query(insertQuery, [category_id,title,dateOfBlog,description], (insertError, insertResults) => {
+        const insertQuery = 'INSERT INTO blogs(category_id,title,dateOfBlog,description ,image) VALUES (?,?,?,?,?)';
+        connection.query(insertQuery, [category_id,title,dateOfBlog,description,image], (insertError, insertResults) => {
           if (insertError) {
             reject(insertError);
           } else {
@@ -183,7 +129,7 @@ class blog {
     if (limit !== "") {
       limitClause = "ORDER BY blogs.id DESC LIMIT " + limit;
     }
-    const blogs_list = `SELECT blogs.image,blogs.title,DATE_FORMAT(blogs.dateOfBlog, "%M %d, %Y") as dateOfBlog, blogs.description,blog_category.category_name from blogs INNER JOIN blog_category on blog_category.id = blogs.category_id ${limitClause}`;
+    const blogs_list = `SELECT blogs.id, blogs.image,blogs.title,DATE_FORMAT(blogs.dateOfBlog, "%M %d, %Y") as dateOfBlog, blogs.description,blog_category.category_name from blogs INNER JOIN blog_category on blog_category.id = blogs.category_id ${limitClause}`;
     return new Promise((resolve, reject) => {
       connection.query(blogs_list, (error, results) => {
         if (error) {

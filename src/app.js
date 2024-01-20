@@ -17,11 +17,13 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 app.use(session({
-  secret : 'webslesson',
-  resave : true,
-  saveUninitialized : true
+  secret : 'Shivmandir',
+  resave : false,
+  saveUninitialized : true,
+  cookie: {
+    maxAge: 60 * 60 * 1000, // 1 hour in milliseconds
+  },
 }));
-//app.use("/uploads", express.static(path.join(__dirname, "public/uploads")));
 
 
 
@@ -99,10 +101,10 @@ app.get("/blog-details", async(req,res) =>{
       res.render("FrontEnd/404", { title: "Error Page",webDetail, message: "Internal Server Error"});      }
 });
 
-app.get("/broadcast", async(req,res) =>{
+app.get("/video-gallery", async(req,res) =>{
     try {
         let webDetail = await fetchData(); 
-        res.render("FrontEnd/broadcast", { title: "Broadcast", webDetail});
+        res.render("FrontEnd/video-gallery", { title: "Video Gallery", webDetail});
         } catch (error) {
           res.render("FrontEnd/404", { title: "Error Page",webDetail, message: "Internal Server Error"});  
         }
@@ -153,7 +155,7 @@ app.get("/events", async(req,res) =>{
         }
 });
 
-app.get("/image",async (req,res) =>{
+app.get("/image-gallery",async (req,res) =>{
     try {
         let webDetail = await fetchData(); 
         const categoryPujaData = await galleryController.getPujaCategory();
@@ -257,7 +259,9 @@ app.post('/category', authMiddleware.isAuthenticated, galleryController.addCateg
 //app.post('/add-image-gallery', galleryController.addImageGallery);
 // Attach middleware to the route
 app.post('/add-image-gallery', authMiddleware.isAuthenticated, galleryController.upload.single('image'), galleryController.addImageGallery);
-app.post('/add-blog', authMiddleware.isAuthenticated, blogController.addBlog);
+
+app.post('/add-blog', authMiddleware.isAuthenticated, blogController.upload.single('image'), blogController.addBlog);
+
 
 app.get("/category", authMiddleware.isAuthenticated, async (req,res) =>{
   const category_data = await galleryController.getCategory();
@@ -280,7 +284,7 @@ app.get("/add-image-gallery", authMiddleware.isAuthenticated, async (req,res) =>
   res.render("BackEnd/add_image_gallery",{galleryData,categoryAll, title: "Add Image Gallery"});
 });
 
-app.get("/image-gallery", authMiddleware.isAuthenticated, async (req,res) =>{
+app.get("/image-gallery-list", authMiddleware.isAuthenticated, async (req,res) =>{
   const galleryData = await galleryController.getImagegallery();
   res.render("BackEnd/image_gallery",{galleryData, title: "Image Gallery"});
 });
@@ -299,24 +303,24 @@ app.get('/edit-image-gallery', authMiddleware.isAuthenticated, async (req, res) 
  app.post('/add-blog-category', authMiddleware.isAuthenticated, blogController.addCBlogategory);
 
 app.get("/blog-category", authMiddleware.isAuthenticated, async (req,res) =>{
-  const blogCategoryData = await blogController.getBlogategory();
+  const blogCategoryData = await blogController.getBlogCategory();
   res.render("BackEnd/blog_category",{blogCategoryData, title: "Blog Category"},);
 });
 
 app.get('/edit-blog-category', authMiddleware.isAuthenticated, async (req, res) => {
   const blogCategoryId = req.query.id;
   const blogCategoryEditData = await blogController.getBlogCategoryId(blogCategoryId);
-  const blogCategoryData = await blogController.getBlogategory();
+  const blogCategoryData = await blogController.getBlogCategory();
   try {
      res.render("BackEnd/blog_category",{blogCategoryData,blogCategoryEditData, title: "Edit Blog Category"});
   } catch (error) {
     res.render("FrontEnd/404", { title: "Error Page",webDetail, message: "Internal Server Error"});  }
 });
 
-// app.post('/add-blog', blogController.AddBlog);
+//app.post('/add-blog', blogController.AddBlog);
 
 app.get("/add-blog", authMiddleware.isAuthenticated, async (req,res) =>{
-  const blogCategory = await blogController.getBlogategory();
+  const blogCategory = await blogController.getBlogCategory();
   res.render("BackEnd/add_blog",{blogCategory, title: "Add Blog"});
 });
 
@@ -325,13 +329,23 @@ app.get("/blog-list", authMiddleware.isAuthenticated, async (req,res) =>{
   res.render("BackEnd/blog_list",{blogData, title: "Blog List"});
 });
 
-// app.get('/edit-blog', async (req, res) => {
-//   const blogId = req.query.id;
-//   const blogData = await blogController.getBlogId(blogId);
-//   const blogCategory = await blogController.getBlogCategory();
+app.get('/edit-blog',authMiddleware.isAuthenticated, async (req, res) => {
+  const blogId = req.query.id;
+  const blogData = await blogController.getBlogId(blogId);
+  const blogCategory = await blogController.getBlogCategory();
 
+  try {
+     res.render("BackEnd/add_blog",{blogData,blogCategory, title: "Edit Blog"});
+  } catch (error) {
+    res.render("FrontEnd/404", { title: "Error Page",webDetail, message: "Internal Server Error"});  }
+});
+
+// app.get('/edit-blog', authMiddleware.isAuthenticated, async (req, res) => {
+//   const blogCategoryId = req.query.id;
+//   const blogCategoryEditData = await blogController.getBlogCategoryId(blogCategoryId);
+//   const blogCategoryData = await blogController.getBlogCategory();
 //   try {
-//      res.render("BackEnd/add_image_gallery",{blogData,blogCategory, title: "Edit Blog"});
+//      res.render("BackEnd/blog_category",{blogCategoryData,blogCategoryEditData, title: "Edit Blog Category"});
 //   } catch (error) {
 //     res.render("FrontEnd/404", { title: "Error Page",webDetail, message: "Internal Server Error"});  }
 // });
