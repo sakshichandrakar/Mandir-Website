@@ -45,24 +45,35 @@ const fetchData = async () => {
       console.error(error);
     }
   };
+
+  const getCommonData = async () => {
+    try {
+        const [webDetail, testimonialData, categoryAll, blogData] = await Promise.all([
+            fetchData(),
+            testimonialController.getTestimonial(),
+            galleryController.getPujaCategory(),
+            blogController.getBlogList(3),
+        ]);
+
+        return { webDetail, testimonialData, categoryAll, blogData };
+    } catch (error) {
+        throw error; // Propagate the error to the calling function
+    }
+};
   
 app.get("", async (req, res) => {
   try {
-    let webDetail = await fetchData(); 
-    const testimonial_data = await testimonialController.getTestimonial();
-    const categoryAll = await galleryController.getPujaCategory();
+    const { webDetail, testimonialData, categoryAll, blogData } = await getCommonData();
     const galleryPujadata = await galleryController.getPujaGallery('6');
-    const blogData = await blogController.getBlogList(3);
-
-    res.render("FrontEnd/index", { title: "Home", webDetail,testimonial_data,categoryAll,galleryPujadata, blogData});
+    res.render("FrontEnd/index", { title: "Home", webDetail, testimonialData, categoryAll, galleryPujadata, blogData });
   } catch (error) {
     res.render("FrontEnd/404", { title: "Error Page",webDetail, message: "Internal Server Error"});    }
 });
 
 app.get("/about-us", async (req,res) =>{
     try {
-    let webDetail = await fetchData();
-    res.render("FrontEnd/about", { title: "About", webDetail});
+      const { webDetail, blogData } = await getCommonData();
+      res.render("FrontEnd/about", { title: "About", webDetail, blogData });
   } catch (error) {
     res.render("FrontEnd/404", { title: "Error Page",webDetail, message: "Internal Server Error"});  
   }
@@ -70,8 +81,8 @@ app.get("/about-us", async (req,res) =>{
 
 app.get("/contact", async (req,res) =>{
     try {
-        let webDetail = await fetchData(); 
-        res.render("FrontEnd/contact", { title: "Contact", webDetail});
+      const { webDetail, blogData } = await getCommonData();
+      res.render("FrontEnd/contact", { title: "Contact", webDetail, blogData });
       } catch (error) {
   res.render("FrontEnd/404", { title: "Error Page",webDetail, message: "Internal Server Error"});      }
 });
@@ -79,7 +90,8 @@ app.get("/contact", async (req,res) =>{
 app.get("/service",async (req,res) =>{
     try {
         let webDetail = await fetchData(); 
-        res.render("FrontEnd/service", { title: "Service", webDetail});
+        const blogData = await blogController.getBlogList(3);
+        res.render("FrontEnd/service", { title: "Service", webDetail,blogData});
       } catch (error) {
       res.render("FrontEnd/404", { title: "Error Page",webDetail, message: "Internal Server Error"});      }
 });

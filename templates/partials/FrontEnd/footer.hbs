@@ -24,13 +24,13 @@
           <div class="col-xl-2 col-lg-2 col-md-4 col-sm-12 footer-widget">
             <h5 class="widget-title">Information</h5>
             <ul>
-              <li> <a href="about-us">About</a> </li>
-              <li> <a href="blog">Blog</a> </li>
               <li> <a href="faq">FAQ</a> </li>
+              <li> <a href="blog">Blog</a> </li>
+              <li> <a href="about-us">About</a> </li>
               <li> <a href="service">Service</a> </li>
+              <li> <a href="contact">Contact</a> </li>
               <li> <a href="image">Image Gallery</a> </li>
               <li> <a href="video">Video Gallery</a> </li>
-              <li> <a href="contact">Contact</a> </li>
             </ul>
           </div>
           <div class="col-xl-2 col-lg-2 col-md-4 col-sm-12 footer-widget">
@@ -47,7 +47,7 @@
             <h5 class="widget-title">Recent Posts</h5>
               {{#each blogData as |data|}}
                 <article class="sigma_recent-post">
-                  <a href="blog-details"><img src="uploads/blog/gallery/{{data.image}}" alt="post"></a>
+                  <a href="blog-details"><img src="uploads/blog/{{data.image}}" alt="post"></a>
                   <div class="sigma_recent-post-body">
                     <a href="blog-details"> <i class="far fa-calendar"></i> {{data.dateOfBlog}}</a>
                     <h6> <a href="blog-details">{{data.title}}</a> </h6>
