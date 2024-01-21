@@ -34,15 +34,15 @@
       <div class="row">
 
         <div class="col-lg-4 col-md-6">
-          <a href="about" class="sigma_service border text-center style-1 bg-white">
+          <a href="about" class="sigma_service border text-center style-1 secondary-bg">
             <div class="sigma_service-thumb">
-              <i class="flaticon-temple"></i>
+              <i class="flaticon-temple text-white"></i>
               <span></span>
               <span></span>
             </div>
             <div class="sigma_service-body">
-              <h5>Temple</h5>
-              <p>Temple is place where hindu worship  consectetur adipisicing elit, sed do </p>
+              <h5 class="text-white">Temple</h5>
+              <p class="text-white">Temple is place where hindu worship  consectetur adipisicing elit, sed do </p>
             </div>
           </a>
         </div>
@@ -55,7 +55,7 @@
               <span></span>
             </div>
             <div class="sigma_service-body">
-              <h5 class="text-white">Puja</h5>
+              <h5 class="text-white">Services</h5>
               <p class="text-white">Temple is place where hindu worship  consectetur adipisicing elit, sed do </p>
             </div>
           </a>
@@ -64,7 +64,7 @@
         <div class="col-lg-4 col-md-6">
           <a href="pandit-details" class="sigma_service border text-center style-1 secondary-bg">
             <div class="sigma_service-thumb">
-              <i class="custom-primary flaticon-pooja"></i>
+              <i class="text-white flaticon-pooja"></i>
               <span></span>
               <span></span>
             </div>
@@ -126,8 +126,7 @@
           <div class="sigma_cta lg primary-bg">
             <img class="d-none d-lg-block" src="assets/img/cta/31.png" alt="cta"style="height: 1100px; width: 1120px; z-index: -10;padding-top: 100px;">
             <div class="sigma_cta-content">
-              <span class="fw-600 custom-secondary">Contact Us</span>
-              <h4 class="text-white">+91111111111</h4>
+              <h5 class="text-white"><i class="fal fa-envelope"></i> {{webDetail.[0].email }}</h5>
             </div>
           </div>
         </div>
@@ -136,10 +135,8 @@
             <span class="sigma_cta-sperator d-none d-lg-flex">or</span>
             <div class="sigma_cta-content">
               <form method="post">
-                <label class="mb-0 text-white">Temple Newsletter</label>
                 <div class="sigma_search-adv-input">
-                  <input type="text" class="form-control" placeholder="Enter email address" name="search" value="">
-                  <button type="submit" name="button"><i class="far fa-envelope"></i></button>
+                 <h5 class="text-white"><i class="fal fa-phone"></i> {{webDetail.[0].mobile_no}}</h5>
                 </div>
               </form>
             </div>
